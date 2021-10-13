@@ -1,0 +1,22 @@
+<div class="container">
+  <mat-card-subtitle fxLayoutAlign="center">Login to work</mat-card-subtitle>
+  <mat-card-content>
+    <form fxLayoutAlign="stretch" fxLayout="column">
+      <mat-form-field appearance="legacy">
+        <input matInput placeholder="Email">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input matInput type="password" placeholder="Password">
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Login</button>
+      </mat-card-actions>
+    </form>
+
+    <mat-card-footer fxLayoutAlign="center">Don't have an account?&nbsp;<a [routerLink]="['/registration']">Registration</a></mat-card-footer>
+
+  </mat-card-content>
+</div>
+

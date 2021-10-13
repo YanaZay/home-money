@@ -1,0 +1,31 @@
+<div class="container">
+  <mat-card-subtitle fxLayoutAlign="center">Registration for access</mat-card-subtitle>
+  <mat-card-content>
+    <form fxLayoutAlign="stretch" fxLayout="column">
+      <mat-form-field appearance="legacy">
+        <input matInput type="email" placeholder="Email">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input matInput type="password" placeholder="Password">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input matInput type="text" placeholder="Username">
+      </mat-form-field>
+
+      <mat-card-actions>
+        <mat-checkbox class="example-margin">Checked</mat-checkbox>
+      </mat-card-actions>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Registration</button>
+      </mat-card-actions>
+    </form>
+
+    <mat-card-footer fxLayoutAlign="center">Already have an account?&nbsp;<a [routerLink]="['/login']">Login</a></mat-card-footer>
+
+  </mat-card-content>
+
+</div>
+
