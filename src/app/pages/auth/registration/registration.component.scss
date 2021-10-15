@@ -1,3 +1,14 @@
-.container {
-  height: 40vh;
+::ng-deep .mat-form-field {
+  padding-top: 0.7rem;
+}
+
+::ng-deep .mat-card-actions {
+  padding-left: 0.5rem;
+  padding-top: 1rem;
+}
+
+::ng-deep .mat-card-footer {
+  a {
+    text-decoration: none;
+  }
 }

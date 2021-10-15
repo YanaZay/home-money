@@ -1,17 +1,26 @@
 <div class="container">
   <mat-card-subtitle fxLayoutAlign="center">Login to work</mat-card-subtitle>
   <mat-card-content>
-    <form fxLayoutAlign="stretch" fxLayout="column">
+    <small fxLayoutAlign="stretch" fxLayoutAlign="center" *ngIf="userError">No such user was found.</small>
+    <small fxLayoutAlign="stretch" fxLayoutAlign="center" *ngIf="passwordError">Wrong password.</small>
+    <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="form" (ngSubmit)="login()">
       <mat-form-field appearance="legacy">
-        <input matInput placeholder="Email">
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="form.controls.email.errors?.required">Email is required.</mat-error>
+        <mat-error *ngIf="form.controls.email.errors?.email">Please enter a valid email address.</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <input matInput type="password" placeholder="Password">
+        <input matInput type="password" placeholder="Password" formControlName="password">
+        <mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
+        <mat-error *ngIf="form.controls.password.errors?.minlength">
+          Password must be at least {{form.controls.password.errors?.minlength.requiredLength}} characters long.
+          The password contains {{form.controls.password.errors?.minlength.actualLength}} characters.
+        </mat-error>
       </mat-form-field>
 
       <mat-card-actions>
-        <button mat-raised-button color="primary">Login</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Login</button>
       </mat-card-actions>
     </form>
 

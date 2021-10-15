@@ -1,0 +1,9 @@
+.registration {
+  ::ng-deep .mat-card {
+    width: 20vw;
+    height: 45vh;
+    min-width: 280px;
+    padding: 1.5rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  }
+}
