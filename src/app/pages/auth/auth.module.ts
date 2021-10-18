@@ -7,6 +7,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { MaterialModule } from '../../shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 
 
@@ -22,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class AuthModule { }

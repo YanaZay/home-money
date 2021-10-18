@@ -3,8 +3,20 @@
     {
       "id": 1,
       "email": "yana@mail.com",
-      "password": "12345678",
+        "password": "12345678aA",
       "name": "Администратор"
+    },
+    {
+      "email": "vanya@mail.com",
+      "password": "123456Qq",
+      "user": "user",
+      "id": 2
+    },
+    {
+      "email": "vanya@mail.com",
+      "password": "1234566Qq",
+      "user": "user",
+      "id": 3
     }
   ],
   "bill": {
