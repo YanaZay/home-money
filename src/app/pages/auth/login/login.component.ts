@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../user.interface';
@@ -9,10 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public done: boolean = false;
   public userError: boolean = false;
+  public hide: boolean = true;
   public passwordError: boolean = false;
   private receivedUser: IUser | undefined;
 
@@ -50,10 +51,12 @@ export class LoginComponent implements OnInit {
         }
         if (this.form.value.password === this.receivedUser.password) {
           localStorage.setItem('user', JSON.stringify(this.receivedUser));
-          this.router.navigate([]);
-          console.log('done')
+          this.router.navigate(['/page']);
         }
       });
     }
+  }
+
+  ngOnDestroy(): void {
   }
 }

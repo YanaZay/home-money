@@ -12,7 +12,10 @@
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <input matInput type="password" placeholder="Password" formControlName="password">
+        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
         <mat-error *ngIf="form.controls.password.errors?.minlength">
           Password must be at least {{form.controls.password.errors?.minlength.requiredLength}} characters long.
@@ -22,6 +25,7 @@
 
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Login</button>
+        <button mat-raised-button color="primary" type="button">test</button>
       </mat-card-actions>
     </form>
 

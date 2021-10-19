@@ -10,7 +10,6 @@ import { MaterialModule } from './shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AuthService } from './pages/auth/auth.service';
 import { ApiInterceptor } from './shared/interceptor/api.interceptor';
 
 

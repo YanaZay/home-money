@@ -1,0 +1,11 @@
+:host{
+  ::ng-deep .mat-drawer-container{
+    height: 95vh;
+
+    .mat-drawer {
+      width: 15vw;
+      padding: 0.5rem;
+    }
+  }
+
+}

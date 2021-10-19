@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <div class="left">
+    <button mat-icon-button (click)="toggle.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My home accounting</span>
+  </div>
+
+  <div class="right">
+    <button mat-icon-button>
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>help_outline</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>person</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Make a record</button>
+        <button mat-menu-item>Log out</button>
+      </mat-menu>
+    </button>
+  </div>
+</mat-toolbar>
