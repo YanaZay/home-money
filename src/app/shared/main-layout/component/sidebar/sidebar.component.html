@@ -1,8 +1,15 @@
-<mat-card>
+<mat-card class="sidebar-header">
   <mat-card-title>Administrator</mat-card-title>
-  <mat-card-subtitle>email</mat-card-subtitle>
-  <div mat-card-avatar class="example-header-image">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  </div>
+  <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+  <img style="border-radius: 50%" mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
 </mat-card>
+<mat-card class="sidebar-list">
+  <mat-card-subtitle>Pages</mat-card-subtitle>
+  <mat-list role="listitem">
+    <mat-list-item role="listitem" routerLinkActive="active"><a [routerLink]="['/page/bill']">Billing page</a></mat-list-item>
+    <mat-list-item role="listitem"><a [routerLink]="['/page/history']">History Page</a></mat-list-item>
+    <mat-list-item role="listitem"><a [routerLink]="['/page/record']">Record Page</a></mat-list-item>
+  </mat-list>
+</mat-card>
+
 

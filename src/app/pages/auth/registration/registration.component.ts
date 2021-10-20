@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../user.interface';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public done: boolean = false;
   private receivedUser: IUser | undefined;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private authService: AuthService,
@@ -33,11 +36,18 @@ export class RegistrationComponent implements OnInit {
     if (this.form.valid) {
       const newUser = {...this.form.value};
       delete newUser.check;
-      this.authService.addUser(newUser).subscribe((data:IUser) => {
+      this.authService.addUser(newUser)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data:IUser) => {
         this.receivedUser = data;
         this.done = true;
         this.router.navigate(['/login'], {queryParams: {done: true}});
       }, error => console.log(error));
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

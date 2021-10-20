@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  public isAuthState: boolean = false;
   public users: string = 'users';
 
   constructor(private http: HttpClient) { }
@@ -17,7 +18,15 @@ export class AuthService {
   }
 
   public checkUser(email: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${environment.apiHost}/users?email=${email}`, {headers: {get: ''}});
+    return this.http.get<IUser[]>(`${environment.apiHost}/users?email=${email}`);
+  }
+
+  public login(value: boolean): void {
+    this.isAuthState = value;
+  }
+
+  public isAuthenticated(): boolean {
+    return (this.isAuthState);
   }
 
   public getExchangeRates(): Observable<any> {

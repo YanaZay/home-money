@@ -8,16 +8,22 @@
 
   <div class="right">
     <button mat-icon-button>
-      <mat-icon>settings</mat-icon>
+      &#9900; &nbsp;<mat-icon>settings</mat-icon>
     </button>
     <button mat-icon-button>
-      <mat-icon>help_outline</mat-icon>
+      &#9900; &nbsp;<mat-icon>help_outline</mat-icon>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>person</mat-icon>
+      &#9900; &nbsp;<mat-icon>person</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Make a record</button>
-        <button mat-menu-item>Log out</button>
+        <button mat-menu-item>
+          <mat-icon>note_add</mat-icon>
+          Make a record
+        </button>
+        <button mat-menu-item>
+          <mat-icon>login</mat-icon>
+          Log out
+        </button>
       </mat-menu>
     </button>
   </div>

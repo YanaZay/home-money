@@ -1,0 +1,24 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    font-weight: 500;
+    align-items: center;
+  }
+}
+
+.hr  {
+  margin: 0 auto;
+  content: '';
+  height: 1px;
+  width: 97%;
+  background-color: #d9d7d7;
+}
+
+.content {
+  padding: 1rem;
+}

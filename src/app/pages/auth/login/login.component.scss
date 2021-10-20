@@ -1,27 +1,32 @@
-::ng-deep .mat-card-subtitle.afterReg {
-  margin-left: 0.5rem;
-  color: #4242f3;
-  font-weight: bold;
-  text-align: center;
-}
+:host{
 
-::ng-deep .mat-card-content {
-  small {
-    background-color: red;
-    margin: 0.3rem 0;
-    padding: 0.3rem 0;
-    color: white;
-    font-weight: 400;
+  ::ng-deep .mat-card-subtitle.afterReg {
+    margin-left: 0.5rem;
+    color: #4242f3;
+    font-weight: bold;
+    text-align: center;
   }
-}
 
-::ng-deep .mat-card-actions {
-  padding-left: 0.5rem;
-  padding-top: 1rem;
-}
-
-::ng-deep .mat-card-footer {
-  a {
-    text-decoration: none;
+  ::ng-deep .mat-card-content {
+    small {
+      background-color: red;
+      margin: 0.3rem 0;
+      padding: 0.3rem 0;
+      color: white;
+      font-weight: 400;
+    }
   }
+
+  ::ng-deep .mat-card-actions {
+    padding-left: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  ::ng-deep .mat-card-footer {
+    a {
+      text-decoration: none;
+    }
+  }
+
 }
+

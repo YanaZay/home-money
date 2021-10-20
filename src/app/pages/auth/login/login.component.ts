@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  @Output() public isAuth : EventEmitter<boolean> = new EventEmitter<boolean>();
   public form!: FormGroup;
   public done: boolean = false;
   public userError: boolean = false;
   public hide: boolean = true;
   public passwordError: boolean = false;
   private receivedUser: IUser | undefined;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private authService: AuthService,
@@ -37,7 +41,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   public login(): void {
     if (this.form.valid) {
       const email = this.form.value.email;
-      this.authService.checkUser(email).subscribe( (data:IUser[]) => {
+      this.authService.checkUser(email)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe( (data:IUser[]) => {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
           this.userError = true;
@@ -52,11 +58,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (this.form.value.password === this.receivedUser.password) {
           localStorage.setItem('user', JSON.stringify(this.receivedUser));
           this.router.navigate(['/page']);
+          this.authService.login(true);
         }
       });
     }
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

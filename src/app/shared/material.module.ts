@@ -9,6 +9,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+
 
 const COMPONENTS = [
   MatFormFieldModule,
@@ -19,7 +22,9 @@ const COMPONENTS = [
   MatToolbarModule,
   MatIconModule,
   MatSidenavModule,
-  MatMenuModule
+  MatMenuModule,
+  MatListModule,
+  MatTableModule
 ]
 
 @NgModule({

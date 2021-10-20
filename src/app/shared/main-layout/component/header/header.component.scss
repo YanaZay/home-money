@@ -1,4 +1,12 @@
-::ng-deep .mat-toolbar {
-  display: flex;
-  justify-content: space-between;
+:host{
+  ::ng-deep .mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    .right>button:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
 }
+
+

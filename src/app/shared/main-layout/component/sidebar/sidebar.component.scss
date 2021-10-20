@@ -1,1 +1,48 @@
+:host{
+  ::ng-deep .mat-card{
+    background-color: inherit;
+    border-radius: 0;
 
+    &.sidebar-header {
+      text-align: center;
+
+      .mat-card-subtitle {
+        padding: 0.5rem 0;
+      }
+    }
+
+    &.sidebar-list {
+      padding: 16px 0 0 0;
+
+      .mat-card-subtitle {
+        padding-left: 16px;
+      }
+
+      .mat-list .mat-list-item {
+        cursor: pointer;
+        font-weight: 500;
+        transition: all ease-in-out 0.1s;
+
+        a {
+          text-decoration: none;
+          transition: all ease-in-out 0.1s;
+          color: rgba(0,0,0,.54);
+        }
+
+        &.active {
+          background-color: #3f51b5;
+          a {
+            color: #fff;
+          }
+        }
+
+        &:hover {
+          background-color: #3f51b5;
+          a {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
