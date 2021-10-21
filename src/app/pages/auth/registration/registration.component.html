@@ -8,7 +8,10 @@
         <mat-error *ngIf="form.controls.email.errors?.email">Please enter a valid email address.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
-        <input matInput id="password" type="password" placeholder="Password" formControlName="password">
+        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
         <mat-error *ngIf="form.controls.password.errors?.minlength">
           Password must be at least {{form.controls.password.errors?.minlength.requiredLength}} characters long.
@@ -32,8 +35,6 @@
       </mat-card-actions>
     </form>
     <mat-card-footer fxLayoutAlign="center">Already have an account?&nbsp;<a [routerLink]="['/login']">Login</a></mat-card-footer>
-
   </mat-card-content>
-
 </div>
 

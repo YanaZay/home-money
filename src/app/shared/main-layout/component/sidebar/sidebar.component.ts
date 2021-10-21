@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../../../user.interface';
+import { IUser } from '../../../models/user.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,11 +9,7 @@ import { IUser } from '../../../../user.interface';
 export class SidebarComponent implements OnInit {
   public user!: IUser;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.user = JSON.parse(<string>localStorage.getItem('user'));
-    console.log(this.user)
   }
-
 }

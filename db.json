@@ -11,6 +11,18 @@
       "password": "123456Qq",
       "user": "user",
       "id": 2
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "111111111111111Qq",
+      "user": "vzay",
+      "id": 3
+    },
+    {
+      "email": "vzay@isd.dp.ua",
+      "password": "1995Slz431315",
+      "user": "vzay",
+      "id": 4
     }
   ],
   "bill": {

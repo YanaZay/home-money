@@ -1,4 +1,8 @@
 :host{
+  .left {
+    display: flex;
+    align-items: center;
+  }
   ::ng-deep .mat-toolbar {
     display: flex;
     justify-content: space-between;

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { IUser } from '../../../user.interface';
+import { IUser } from '../../../shared/models/user.interface';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { Subject } from 'rxjs';
@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 export class RegistrationComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public done: boolean = false;
+  public hide: boolean = true;
   private receivedUser: IUser | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 

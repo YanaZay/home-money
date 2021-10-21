@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
+import {AuthGuard} from "./shared/guards/auth.guard";
 
 const routes: Routes = [
   {path: '', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)},
-  {path: 'page', component: MainLayoutComponent, children: [
+  {path: 'page', component: MainLayoutComponent, canActivate: [AuthGuard],  children: [
       {path: 'bill', loadChildren: () => import('./pages/bill/bill.module').then(m => m.BillModule)},
       {path: '', redirectTo: 'bill', pathMatch: 'full'}
     ]}
@@ -12,6 +13,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

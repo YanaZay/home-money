@@ -1,15 +1,20 @@
-::ng-deep .mat-form-field {
-  padding-top: 0.7rem;
-}
-
-::ng-deep .mat-card-actions {
-  padding-left: 0.5rem;
-  padding-top: 1rem;
-  text-align: center;
-}
-
-::ng-deep .mat-card-footer {
-  a {
-    text-decoration: none;
+:host {
+  ::ng-deep .mat-form-field {
+    padding-top: 0.5rem;
   }
+
+  ::ng-deep .mat-card-actions {
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  ::ng-deep .mat-card-footer {
+    a {
+      text-decoration: none;
+    }
+  }
+
 }
+

@@ -11,6 +11,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 
 const COMPONENTS = [
@@ -24,7 +26,8 @@ const COMPONENTS = [
   MatSidenavModule,
   MatMenuModule,
   MatListModule,
-  MatTableModule
+  MatTableModule,
+  MatDividerModule
 ]
 
 @NgModule({

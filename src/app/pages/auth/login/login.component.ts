@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { IUser } from '../../../user.interface';
+import { IUser } from '../../../shared/models/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (this.form.value.password === this.receivedUser.password) {
           localStorage.setItem('user', JSON.stringify(this.receivedUser));
           this.router.navigate(['/page']);
-          this.authService.login(true);
         }
       });
     }

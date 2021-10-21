@@ -1,35 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { IUser } from '../../user.interface';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { IUser } from '../../shared/models/user.interface';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public isAuthState: boolean = false;
-  public users: string = 'users';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   public addUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.apiHost}${this.users}`, user);
+    return this.http.post<IUser>(`${environment.apiHost}/users`, user);
   }
 
+
   public checkUser(email: string): Observable<IUser[]> {
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    }
+
+    const requestOptions = {
+      headers: new Headers(headerDict),
+    };
     return this.http.get<IUser[]>(`${environment.apiHost}/users?email=${email}`);
   }
 
-  public login(value: boolean): void {
-    this.isAuthState = value;
+  public login(): void {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
   public isAuthenticated(): boolean {
-    return (this.isAuthState);
-  }
-
-  public getExchangeRates(): Observable<any> {
-    return this.http.get(`${environment.exchangeRates}`);
+    return !!localStorage.getItem('user');
   }
 }

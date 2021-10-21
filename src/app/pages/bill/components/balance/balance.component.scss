@@ -1,0 +1,16 @@
+:host {
+  ::ng-deep {
+    .mat-card {
+      .mat-list {
+        .mat-list-item {
+          align-items: center;
+        }
+
+        .mat-divider {
+          margin-left: 1rem;
+          width: 93%;
+        }
+      }
+    }
+  }
+}
