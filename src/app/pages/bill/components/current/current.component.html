@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-subtitle><h2>Course</h2></mat-card-subtitle>
+
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="currentCourse">
+
+    <ng-container matColumnDef="currency">
+      <mat-header-cell *matHeaderCellDef>Currency</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.currency}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rates">
+      <mat-header-cell *matHeaderCellDef>Exchange rates</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.rates}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.date}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  </mat-table>
+</mat-card>
+
+
+

@@ -1,19 +1,41 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
-import {BillService} from "./bill.service";
-import {IExchangeInterface} from "../../shared/models/exchange.interface";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BillService } from "./bill.service";
+import { IExchangeInterface } from "../../shared/models/exchange.interface";
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.component.html',
   styleUrls: ['./bill.component.scss']
 })
-export class BillComponent implements OnInit {
-  @Input() public rates: EventEmitter<IExchangeInterface> = new EventEmitter<IExchangeInterface>();
+export class BillComponent implements OnInit, OnDestroy {
+  public rates!: IExchangeInterface;
+  public loading: boolean = true;
+  private destroy$: Subject<void> = new Subject<void>();
+
   constructor(private billService: BillService) { }
 
   ngOnInit(): void {
-    this.billService.getExchangeRates().subscribe((data:IExchangeInterface) => {
-      this.rates.emit(data);
-    })
+    this.getData();
+  }
+
+  public refresh(): void {
+    this.getData();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private getData(): void {
+    // this.loading = true;
+    this.billService.getExchangeRates()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data:IExchangeInterface) => {
+        this.rates = data;
+        this.loading = false;
+      })
   }
 }

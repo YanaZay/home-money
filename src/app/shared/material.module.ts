@@ -14,7 +14,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 
 
-
 const COMPONENTS = [
   MatFormFieldModule,
   MatInputModule,

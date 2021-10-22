@@ -7,6 +7,7 @@ const routes: Routes = [
   {path: '', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)},
   {path: 'page', component: MainLayoutComponent, canActivate: [AuthGuard],  children: [
       {path: 'bill', loadChildren: () => import('./pages/bill/bill.module').then(m => m.BillModule)},
+      {path: 'history', loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryModule)},
       {path: '', redirectTo: 'bill', pathMatch: 'full'}
     ]}
 ];

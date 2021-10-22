@@ -3,26 +3,25 @@
   <mat-card-content>
     <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="form" (ngSubmit)="registration()">
       <mat-form-field appearance="legacy">
-        <input matInput id="email" type="email" placeholder="Email" formControlName="email">
+        <input matInput id="email" type="email" placeholder="Email" formControlName="email" autocomplete="username">
         <mat-error *ngIf="form.controls.email.errors?.required">Email is required.</mat-error>
         <mat-error *ngIf="form.controls.email.errors?.email">Please enter a valid email address.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
-        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" autocomplete="current-password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
         <mat-error *ngIf="form.controls.password.errors?.minlength">
-          Password must be at least {{form.controls.password.errors?.minlength.requiredLength}} characters long.
-          The password contains {{form.controls.password.errors?.minlength.actualLength}} characters.
+          Password must be at least {{form.controls.password.errors?.minlength.requiredLength}} characters long, now {{form.controls.password.errors?.minlength.actualLength}} characters.
         </mat-error>
         <mat-error *ngIf="form.controls.password.errors?.pattern">
-          Your password must contain at least one uppercase, one lowercase, and one number
+          Password must contain at least one uppercase, one lowercase, and one number
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
-        <input matInput type="text" placeholder="Username" formControlName="user">
+        <input matInput type="text" placeholder="Username" formControlName="user" autocomplete="username">
         <mat-error *ngIf="form.controls.user.errors?.required">Username is required.</mat-error>
       </mat-form-field>
 

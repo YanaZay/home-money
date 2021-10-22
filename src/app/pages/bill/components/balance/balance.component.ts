@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../../environments/environment";
 import { IBill } from "../../../../shared/models/bill.interface";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { IExchangeInterface } from '../../../../shared/models/exchange.interface';
 
 @Component({
   selector: 'app-balance',
@@ -11,6 +12,7 @@ import { takeUntil } from "rxjs/operators";
   styleUrls: ['./balance.component.scss']
 })
 export class BalanceComponent implements OnInit, OnDestroy {
+  @Input() public dataRates!: IExchangeInterface;
   public bill!: number;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -21,6 +23,7 @@ export class BalanceComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:IBill) => {
       this.bill = data.value;
+      console.log(this.dataRates)
     })
   }
 

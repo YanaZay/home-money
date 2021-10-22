@@ -6,13 +6,13 @@
     <small fxLayoutAlign="stretch" fxLayoutAlign="center" *ngIf="passwordError">Wrong password.</small>
     <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="form" (ngSubmit)="login()">
       <mat-form-field appearance="legacy">
-        <input matInput placeholder="Email" formControlName="email">
+        <input matInput placeholder="Email" formControlName="email" autocomplete="username">
         <mat-error *ngIf="form.controls.email.errors?.required">Email is required.</mat-error>
         <mat-error *ngIf="form.controls.email.errors?.email">Please enter a valid email address.</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" autocomplete="current-password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>

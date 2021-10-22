@@ -21,4 +21,19 @@
 
 .content {
   padding: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  height: 16rem;
+
+  .component-1 {
+    width: 49%;
+  }
+  .component-2 {
+    width: 49%;
+  }
+}
+
+.loading {
+  padding-top: 2rem;
+  text-align: center;
 }
