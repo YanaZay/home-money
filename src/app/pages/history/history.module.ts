@@ -5,6 +5,8 @@ import { PieComponent } from './components/pie/pie.component';
 import { TableComponent } from './components/table/table.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
+import { HighchartsChartModule } from "highcharts-angular";
+
 
 const routes: Routes = [{path: '', component: HistoryComponent,}];
 
@@ -18,7 +20,8 @@ const routes: Routes = [{path: '', component: HistoryComponent,}];
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
+    MaterialModule,
+    HighchartsChartModule
   ]
 })
 export class HistoryModule { }
