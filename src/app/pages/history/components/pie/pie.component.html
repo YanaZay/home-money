@@ -1,1 +1,8 @@
 <p>pie works!</p>
+
+<highcharts-chart
+  *ngIf="chartOptions"
+  [Highcharts]="Highcharts"
+  [options]="chartOptions">
+
+</highcharts-chart>
