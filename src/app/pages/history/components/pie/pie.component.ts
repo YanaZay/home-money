@@ -32,8 +32,7 @@ export class PieComponent implements OnInit {
 
   public getCategories(): void {
     this.historyService.getCategories().subscribe( (categories: ICategories[]) => {
-      console.log(categories)
-
+      console.log(categories);
     })
   }
 }
