@@ -26,8 +26,21 @@
   padding: 0.5em;
 }
 .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-  background: inherit;
+  background: #f8f8ff;
 }
 .highcharts-data-table tr:hover {
-  background: inherit;
+  background: #f8f8ff;
 }
+
+.highcharts-legend .highcharts-no-tooltip {
+  .highcharts-credits {
+    text {
+      display: none;
+    }
+  }
+}
+
+.highcharts-button-box .highcharts-button-symbol {
+  display: none;
+}
+

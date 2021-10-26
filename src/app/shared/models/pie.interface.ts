@@ -1,13 +1,10 @@
-export interface IPie {
-  chart: any,
-  title: any
-  tooltip: any,
-  accessibility: any,
-  plotOptions: any,
-  series: [{
-    name: string,
-    data: IPartPie[]
-  }]
+import * as Highcharts from 'highcharts';
+
+
+export interface IPie extends Highcharts.Options {
+  chart: {},
+  title: {},
+  series: []
 }
 
 export interface IPartPie {

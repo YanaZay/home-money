@@ -1,6 +1,8 @@
 <highcharts-chart
-  *ngIf="chartOptions"
+  *ngIf="pieArray.length > 0"
   [Highcharts]="Highcharts"
   [options]="chartOptions">
-
 </highcharts-chart>
+<div class="loading" *ngIf="pieArray.length === 0">
+  Loading...
+</div>

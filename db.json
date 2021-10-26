@@ -70,28 +70,36 @@
       "description": "Купил посудомоечную машину"
     },
     {
+      "id": 3,
       "type": "income",
       "amount": 1480,
       "category": 2,
       "date": "17.06.2019 14:00:48",
-      "id": 3,
       "description": "Поход в окей с баллами. Бесплатная еда"
     },
     {
+      "id": 4,
       "type": "outcome",
       "amount": 2470,
       "category": 2,
       "date": "17.06.2019 14:00:58",
-      "id": 4,
       "description": "Закупка на неделю"
     },
     {
+      "id": 5,
       "type": "outcome",
       "amount": 4000,
       "category": 3,
       "date": "10.06.2019 14:01:58",
-      "id": 5,
       "description": "Заправка + проход ТО"
+    },
+    {
+      "id": 6,
+      "type": "outcome",
+      "amount": 1300,
+      "category": 3,
+      "date": "13.06.2019 19:49:02",
+      "description": "Купил машину"
     }
   ]
 }

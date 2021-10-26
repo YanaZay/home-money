@@ -25,7 +25,7 @@ export class PieComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getEvents();
-    this.getCategories();
+    this.viewCharts();
   }
 
   public getEvents(): void {
@@ -34,6 +34,7 @@ export class PieComponent implements OnInit {
         event.type === 'outcome' ? this.outcomeArray.push(event) : null;
       }
     })
+    this.getCategories();
   }
 
   public getCategories(): void {
@@ -46,68 +47,56 @@ export class PieComponent implements OnInit {
               y: item.amount
             }
             this.pieArray.push(result);
-            // this.chartOptions.series.push()
           }
         }
       }
-      console.log(this.pieArray)
     })
-    this.getCharts();
   }
 
-  public getCharts(): void {
-    if (this.pieArray) {
-      this.chartOptions = {
+  public viewCharts(): void {
+     this.chartOptions = {
         chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
+          renderTo: 'histogram',
+          defaultSeriesType: 'pie',
+          backgroundColor:'rgba(255, 255, 255, 0.0)',
         },
         title: {
-          text: 'RANDOM DATA'
+          text: null
         },
         tooltip: {
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+          point: {
+            valueSuffix: '%'
+          }
         },
         plotOptions: {
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
+            // colors: pieColors,
             dataLabels: {
               enabled: true,
-              format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+              format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+              distance: -50,
+              filter: {
+                property: 'percentage',
+                operator: '>',
+                value: 4
+              }
             }
           }
-        },
-        exporting: {
-          enabled: true
-        },
-        credits: {
-          enabled: false
         },
         series: [{
           name: 'Brands',
           colorByPoint: true,
           data: this.pieArray
         }]
-      };  //
     }
-    // [
-    //   { name: 'Chrome', y: 61.41 },
-    //   { name: 'Internet Explorer', y: 11.84 },
-    //   { name: 'Firefox', y: 10.85 },
-    //   { name: 'Edge', y: 4.67 },
-    //   { name: 'Safari', y: 4.18 },
-    //   { name: 'Other', y: 7.05 }
-    // ]
 
     HC_exporting(Highcharts);
 
-    setTimeout(() => {
-      window.dispatchEvent(
-        new Event('resize')
-      );
-    },300)
   }
+
 }
