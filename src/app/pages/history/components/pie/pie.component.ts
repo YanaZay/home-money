@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HistoryService } from '../../history.service';
 import { IEvents } from '../../../../shared/models/events.interface';
 import { ICategories } from '../../../../shared/models/categories.interface';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import { IPartPie, IPie } from '../../../../shared/models/pie.interface';
+import { IPartPie } from '../../../../shared/models/pie.interface';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -13,11 +15,12 @@ import { IPartPie, IPie } from '../../../../shared/models/pie.interface';
   templateUrl: './pie.component.html',
   styleUrls: ['./pie.component.scss']
 })
-export class PieComponent implements OnInit {
+export class PieComponent implements OnInit, OnDestroy {
   public outcomeArray: IEvents[] = [];
   public Highcharts = Highcharts;
   public chartOptions = {};
   public pieArray: IPartPie[] = [];
+  private destroy$: Subject<void> =  new Subject<void>();
 
   constructor(
     private historyService: HistoryService
@@ -26,10 +29,13 @@ export class PieComponent implements OnInit {
   public ngOnInit(): void {
     this.getEvents();
     this.viewCharts();
+    console.log(new Date())
   }
 
   public getEvents(): void {
-    this.historyService.getEvents().subscribe((events:IEvents[]) => {
+    this.historyService.getEvents()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((events:IEvents[]) => {
       for (let event of events) {
         event.type === 'outcome' ? this.outcomeArray.push(event) : null;
       }
@@ -38,7 +44,10 @@ export class PieComponent implements OnInit {
   }
 
   public getCategories(): void {
-    this.historyService.getCategories().subscribe( (categories: ICategories[]) => {
+    let currentArray: IPartPie[] = [];
+    this.historyService.getCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe( (categories: ICategories[]) => {
       for (let cat of categories) {
         for (let item of this.outcomeArray) {
           if (cat.id === item.category) {
@@ -46,12 +55,30 @@ export class PieComponent implements OnInit {
               name: cat.name,
               y: item.amount
             }
-            this.pieArray.push(result);
+            currentArray.push(result);
           }
         }
       }
+
+      let noUniqArray: IPartPie[] = [];
+      currentArray.filter(( currentObject) => {
+        let value = this.pieArray.findIndex(x => (x.name === currentObject.name));
+        if (value <= -1) {
+          this.pieArray.push(currentObject);
+        } else {
+          noUniqArray.push(currentObject)
+        }
+      })
+
+      for (let value of this.pieArray) {
+        for (let noUniq of noUniqArray) {
+          noUniq.name === value.name ? value.y += noUniq.y : null;
+        }
+      }
     })
+    console.log(this.pieArray)
   }
+
 
   public viewCharts(): void {
      this.chartOptions = {
@@ -71,11 +98,19 @@ export class PieComponent implements OnInit {
             valueSuffix: '%'
           }
         },
+       exporting: {
+          buttons: {
+            contextButton: {
+              className: null,
+              enabled: false
+            }
+          }
+       },
         plotOptions: {
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            // colors: pieColors,
+            // colors: this.getColors(),
             dataLabels: {
               enabled: true,
               format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
@@ -94,9 +129,23 @@ export class PieComponent implements OnInit {
           data: this.pieArray
         }]
     }
-
     HC_exporting(Highcharts);
+  }
 
+  public getColors (): any {
+    // let colors = [];
+    // let base = Highcharts.getOptions().colors;
+    //
+    // for (let i = 0; i < 10; i += 1) {
+    //
+    //   colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
+    // }
+    // return colors;
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

@@ -12,6 +12,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 
 const COMPONENTS = [
@@ -26,7 +28,8 @@ const COMPONENTS = [
   MatMenuModule,
   MatListModule,
   MatTableModule,
-  MatDividerModule
+  MatDividerModule,
+  MatPaginatorModule
 ]
 
 @NgModule({

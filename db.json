@@ -50,6 +50,11 @@
       "id": 3,
       "name": "Машина",
       "capacity": 7000
+    },
+    {
+      "id": 4,
+      "name": "Здоровье",
+      "capacity": 7000
     }
   ],
   "events": [
@@ -108,6 +113,22 @@
       "category": 3,
       "date": "17.06.2019 14:00:58",
       "description": "Закупка на неделю"
+    },
+    {
+      "id": 8,
+      "type": "outcome",
+      "amount": 1355,
+      "category": 4,
+      "date": "17.06.2019 14:00:58",
+      "description": "Лекарства"
+    },
+    {
+      "id": 9,
+      "type": "outcome",
+      "amount": 1355,
+      "category": 4,
+      "date": "17.06.2019 14:00:58",
+      "description": "Массаж"
     }
   ]
 }
