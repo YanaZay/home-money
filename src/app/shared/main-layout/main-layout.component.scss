@@ -1,9 +1,12 @@
 :host{
   ::ng-deep .mat-drawer-container{
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
+    overflow: auto;
 
     .mat-drawer-content {
       background-color: #f8f8ff;
+      min-height: 100vh;
     }
 
     .sidebar {
@@ -11,7 +14,4 @@
       background-color: #eaf1ff;
     }
   }
-
-
-
 }

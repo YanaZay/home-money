@@ -100,6 +100,14 @@
       "category": 3,
       "date": "13.06.2019 19:49:02",
       "description": "Купил машину"
+    },
+    {
+      "id": 7,
+      "type": "outcome",
+      "amount": 1355,
+      "category": 3,
+      "date": "17.06.2019 14:00:58",
+      "description": "Закупка на неделю"
     }
   ]
 }
