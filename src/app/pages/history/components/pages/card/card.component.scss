@@ -1,0 +1,29 @@
+:host {
+  ::ng-deep {
+    .mat-card {
+      width: 25vw;
+      margin: 2rem auto;
+
+      .mat-card-title {
+        text-align: center;
+        font-weight: 500;
+
+        &.blue {
+          color: #3f51b5;
+        }
+
+        &.red {
+          color: #f44336;
+        }
+      }
+
+      &.blue-shadow {
+        box-shadow: 0.5rem 0.5rem 3px #d3d7f0;
+      }
+
+      &.red-shadow {
+        box-shadow: 0.5rem 0.5rem 3px #f7d4d7;
+      }
+    }
+  }
+}

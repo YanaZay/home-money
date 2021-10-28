@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { IEvents } from '../../../../shared/models/events.interface';
-import { HistoryService } from '../../history.service';
-import { ICategories } from '../../../../shared/models/categories.interface';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { IEvents } from '../../../../../../shared/models/events.interface';
+import { HistoryService } from '../../../../history.service';
+import { ICategories } from '../../../../../../shared/models/categories.interface';
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
@@ -13,10 +13,11 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy {
+  public eventArray!: IEvents[];
   public dataSource!: MatTableDataSource<IEvents>;
   public displayedColumns: string[] = ['id', 'amount', 'date', 'category', 'type', 'action'];
   private destroy$: Subject<void> = new Subject<void>();
-
+  @Output() public onCard: EventEmitter<IEvents> = new EventEmitter<IEvents>();
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
 
   constructor(
@@ -28,12 +29,13 @@ export class TableComponent implements OnInit, OnDestroy {
     this.historyService.getEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe((events:IEvents[]) => {
-      currentValue = events;
+        this.eventArray = events;
+        currentValue = events;
 
-      this.dataSource = new MatTableDataSource(events);
-      this.dataSource.paginator = this.paginator;
-
-    });
+        this.dataSource = new MatTableDataSource(events);
+        this.dataSource.paginator = this.paginator;
+      }
+    );
 
     this.historyService.getCategories()
       .pipe(takeUntil(this.destroy$))
@@ -51,9 +53,12 @@ export class TableComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
 }
+
 

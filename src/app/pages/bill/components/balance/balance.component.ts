@@ -23,7 +23,6 @@ export class BalanceComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:IBill) => {
       this.bill = data.value;
-      console.log(this.dataRates)
     })
   }
 

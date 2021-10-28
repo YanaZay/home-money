@@ -34,7 +34,11 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-stroked-button color="primary" routerLink="/card/{{element.id}}">Open</button>
+        <button
+          mat-stroked-button
+          color="primary"
+          [routerLink]="['/page/history', element.id]"
+        >Open</button>
       </mat-cell>
     </ng-container>
 
@@ -47,6 +51,6 @@
 
 </div>
 
-<button class="add-event" mat-raised-button color="primary">Add an event</button>
+<button class="add-event" mat-raised-button color="primary">Add new event</button>
 
 

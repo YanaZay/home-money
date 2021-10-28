@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HistoryService } from '../../history.service';
-import { IEvents } from '../../../../shared/models/events.interface';
-import { ICategories } from '../../../../shared/models/categories.interface';
+import { HistoryService } from '../../../../history.service';
+import { IEvents } from '../../../../../../shared/models/events.interface';
+import { ICategories } from '../../../../../../shared/models/categories.interface';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import { IPartPie } from '../../../../shared/models/pie.interface';
+import { IPartPie } from '../../../../../../shared/models/pie.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -29,7 +29,6 @@ export class PieComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.getEvents();
     this.viewCharts();
-    console.log(new Date())
   }
 
   public getEvents(): void {
@@ -76,7 +75,6 @@ export class PieComponent implements OnInit, OnDestroy {
         }
       }
     })
-    console.log(this.pieArray)
   }
 
 
@@ -85,7 +83,7 @@ export class PieComponent implements OnInit, OnDestroy {
         chart: {
           renderTo: 'histogram',
           defaultSeriesType: 'pie',
-          backgroundColor:'rgba(255, 255, 255, 0.0)',
+          backgroundColor:'rgba(255, 255, 255, 0.0)'
         },
         title: {
           text: null
@@ -134,7 +132,7 @@ export class PieComponent implements OnInit, OnDestroy {
 
   public getColors (): any {
     // let colors = [];
-    // let base = Highcharts.getOptions().colors;
+    // let base = Highcharts.getOptions().colors[0];
     //
     // for (let i = 0; i < 10; i += 1) {
     //

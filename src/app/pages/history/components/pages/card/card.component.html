@@ -1,0 +1,13 @@
+<mat-card *ngIf="currentEvent" [class.blue-shadow]="currentEvent.type === 'income'" [class.red-shadow]="currentEvent.type === 'outcome'">
+  <mat-card-title
+    [class.blue]="currentEvent.type === 'income'" [class.red]="currentEvent.type === 'outcome'" >{{currentEvent.type | titlecase}}
+  </mat-card-title>
+  <mat-card-content>
+    <ul>
+      <li>Sum: <b>{{currentEvent.amount | number:'1.2'}} EUR</b></li>
+      <li>Category: <b>{{currentEvent.category}}</b></li>
+      <li>Comment: <b>{{currentEvent.description}}</b></li>
+    </ul>
+    <span>{{currentEvent.date}}</span>
+  </mat-card-content>
+</mat-card>

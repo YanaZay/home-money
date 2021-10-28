@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, EventEmitter, Output } from '@angular/core';
 import {AuthService} from "../../../../pages/auth/auth.service";
 
 @Component({

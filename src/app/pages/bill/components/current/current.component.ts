@@ -28,6 +28,5 @@ export class CurrentComponent implements OnInit {
         }
       }
     }
-    console.log(this.currentCourse)
   }
 }

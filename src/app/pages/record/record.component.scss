@@ -1,0 +1,36 @@
+.record {
+  .title {
+    padding: 1rem;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+      font-weight: 500;
+      align-items: center;
+    }
+  }
+
+  .hr  {
+    margin: 0 auto;
+    content: '';
+    height: 1px;
+    width: 97%;
+    background-color: #d9d7d7;
+  }
+
+  .main-content {
+    .mat-table {
+      margin-top: 2rem;
+      width: 95%;
+    }
+    .mat-column-button {
+      width: 5rem;
+    }
+  }
+
+  .buttons {
+    margin: 2rem 2rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+}

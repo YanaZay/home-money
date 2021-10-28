@@ -16,7 +16,7 @@
     <button mat-icon-button [matMenuTriggerFor]="menu">
       &#9900; &nbsp;<mat-icon>person</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item [routerLink]="['/page/record']">
           <mat-icon>note_add</mat-icon>
           Make a record
         </button>

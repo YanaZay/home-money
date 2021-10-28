@@ -32,14 +32,16 @@
   background: #f8f8ff;
 }
 
-.highcharts-legend .highcharts-no-tooltip {
-  .highcharts-credits {
-    text {
+.highcharts-contextbutton {
+  display: none;
+}
+
+.highcharts-container {
+  //highcharts-root
+  svg.highcharts-root {
+    text.highcharts-credits {
       display: none;
     }
   }
 }
 
-.highcharts-contextbutton {
-  display: none;
-}

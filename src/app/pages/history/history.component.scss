@@ -1,23 +1,24 @@
-.title {
-  padding: 0.5rem;
-  align-items: center;
-
-  h3 {
-    margin: 0;
-    font-weight: 500;
+.history {
+  .title {
+    padding: 0.5rem;
     align-items: center;
+
+    h3 {
+      margin: 0;
+      font-weight: 500;
+
+      mat-icon {
+        vertical-align: top;
+        cursor: pointer;
+      }
+    }
   }
-}
 
-.hr  {
-  margin: 0 auto;
-  content: '';
-  height: 1px;
-  width: 97%;
-  background-color: #d9d7d7;
-}
-
-app-table {
-  margin: 0 2rem;
-  width: 90%;
+  .hr  {
+    margin: 0 auto;
+    content: '';
+    height: 1px;
+    width: 97%;
+    background-color: #d9d7d7;
+  }
 }
