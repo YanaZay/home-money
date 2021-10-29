@@ -1,0 +1,20 @@
+.add-event-modal {
+  height: 35vh;
+  width: 35vh;
+
+  .mat-form-field {
+    width: 95%;
+  }
+
+  .radio-buttons {
+    .mat-radio-group {
+      .mat-radio-button {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .buttons {
+    justify-content: end;
+  }
+}

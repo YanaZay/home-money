@@ -1,0 +1,10 @@
+.delete-category {
+  .buttons {
+    display: flex;
+    justify-content: end;
+    button {
+      margin: 0.4rem;
+      right: 0;
+    }
+  }
+}

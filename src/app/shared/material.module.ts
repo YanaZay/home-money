@@ -13,7 +13,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 const COMPONENTS = [
@@ -29,7 +31,10 @@ const COMPONENTS = [
   MatListModule,
   MatTableModule,
   MatDividerModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule,
+  MatSelectModule,
+  MatRadioModule
 ]
 
 @NgModule({

@@ -6,7 +6,7 @@
   <div class="hr"></div>
 
   <div class="buttons">
-    <button mat-raised-button color="primary">Add new record</button>
+    <button mat-raised-button color="primary" (click)="addNewEvent()">Add new record</button>
     <button mat-raised-button color="primary">Add new category</button>
   </div>
 
@@ -15,7 +15,7 @@
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        <mat-cell *matCellDef="let element; let i = index"> {{ i + 1}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="name">
@@ -28,13 +28,13 @@
         <mat-cell *matCellDef="let element"> {{element.capacity}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="button" class="button">
+        <ng-container matColumnDef="button" class="button">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        <mat-cell *matCellDef="let element" style="justify-content: end">
           <button mat-button>
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-button>
+          <button mat-button (click)="deleteCategory(element)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>

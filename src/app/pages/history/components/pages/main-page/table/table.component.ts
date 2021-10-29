@@ -53,12 +53,13 @@ export class TableComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  public addNewEvent() {
+  }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }
 
 

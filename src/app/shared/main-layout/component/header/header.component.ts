@@ -10,8 +10,8 @@ export class HeaderComponent {
   @Output() public toggle: EventEmitter<void> =  new EventEmitter<void>();
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+  ) {}
 
   public logout(): void {
     this.authService.login();

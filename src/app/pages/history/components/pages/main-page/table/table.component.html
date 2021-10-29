@@ -18,7 +18,7 @@
 
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.date | date:'d/M/yy'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="category">
@@ -51,6 +51,6 @@
 
 </div>
 
-<button class="add-event" mat-raised-button color="primary">Add new event</button>
+<button class="add-event" mat-raised-button color="primary" (click)="addNewEvent()">Add new event</button>
 
 

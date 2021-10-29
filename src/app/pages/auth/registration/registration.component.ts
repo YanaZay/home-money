@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../shared/models/user.interface';
 import { Router } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

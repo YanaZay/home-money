@@ -1,0 +1,37 @@
+<div class="add-event-modal">
+  <h2 mat-dialog-title>Add new record</h2>
+
+  <form [formGroup]="form" (ngSubmit)="addNewEvent()">
+
+    <mat-form-field>
+      <mat-select formControlName="category">
+        <mat-option value="{{item.name}}" *ngFor="let item of data; let i = index">{{item.name}}</mat-option>
+      </mat-select>
+      <mat-label>Choose category</mat-label>
+    </mat-form-field>
+
+    <div class="radio-buttons">
+      <label>Choose type: </label>
+      <mat-radio-group formControlName="type" style="justify-content: end">
+        <mat-radio-button value="outcome">Outcome</mat-radio-button>
+        <mat-radio-button value="income">Income</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="Enter the amount" formControlName="amount">
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="Enter a description" formControlName="description">
+    </mat-form-field>
+
+    <div mat-dialog-actions class="buttons">
+      <button mat-raised-button mat-dialog-close color="primary" type="submit" [disabled]="form.invalid">Add</button>
+      <button mat-raised-button mat-dialog-close>Close</button>
+    </div>
+
+  </form>
+
+</div>
+
