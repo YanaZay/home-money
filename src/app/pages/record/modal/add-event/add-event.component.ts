@@ -41,14 +41,14 @@ export class AddEventComponent implements OnInit, OnDestroy {
       this.recordService.addNewEvent(this.form.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe( () => {
-        this.close(true);
+        // this.close(true);
       })
     }
   }
 
-  public close(isAdded: boolean): void {
-    this.dialogRef.close(isAdded);
-  }
+  // public close(isAdded: boolean): void {
+  //   this.dialogRef.close(isAdded);
+  // }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
