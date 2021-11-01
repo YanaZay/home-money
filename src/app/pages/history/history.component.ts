@@ -1,5 +1,5 @@
-import { AfterContentInit, AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { HistoryService } from './history.service';
@@ -20,7 +20,9 @@ export class HistoryComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.historyService.changeHistoryTitle.subscribe(data => {
+    this.historyService.changeHistoryTitle
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
       this.id = data;
     })
   }

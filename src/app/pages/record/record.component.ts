@@ -6,6 +6,8 @@ import { AddEventComponent } from './modal/add-event/add-event.component';
 import { DeleteCategoryComponent } from './modal/delete-category/delete-category.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AddCategoryComponent } from './modal/add-category/add-category.component';
+import { EditCategoryComponent } from './modal/edit-category/edit-category.component';
 
 @Component({
   selector: 'app-record',
@@ -16,11 +18,11 @@ export class RecordComponent implements OnInit, OnDestroy {
   public start: number = 0;
   public dataSource!: ICategories[];
   public displayedColumns: string [] = ['id', 'name', 'capacity', 'button'];
+  private destroy$: Subject<void> = new Subject<void>()
 
   constructor(
     private service: HistoryService,
     private matDialog: MatDialog,
-    private destroy$: Subject<void> = new Subject<void>()
   ) {}
 
   public ngOnInit(): void {
@@ -49,22 +51,46 @@ export class RecordComponent implements OnInit, OnDestroy {
       .subscribe(
       data => {
         if (data) {
-          return;
+          this._getData()
         }
       }
     )
   }
 
-  private _getData(): void {
-    this.service.getCategories()
+  public addNewCategory(): void {
+    const dialogRef = this.matDialog.open<AddCategoryComponent>(AddCategoryComponent);
+
+    dialogRef.afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
-      this.dataSource = data;
+      .subscribe(
+      data => {
+        if (data) {
+          this._getData()
+        }
+      }
+    )
+  }
+
+  public editCategory(category: ICategories): void {
+    const dialogRef = this.matDialog.open<EditCategoryComponent>(EditCategoryComponent, {data: category});
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this._getData()
+      }
     })
   }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private _getData(): void {
+    this.service.getCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.dataSource = data;
+      })
   }
 }

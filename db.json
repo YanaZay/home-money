@@ -5,30 +5,6 @@
       "email": "yana@mail.com",
       "password": "12345678aA",
       "name": "Администратор"
-    },
-    {
-      "email": "vanya@mail.com",
-      "password": "123456Qq",
-      "user": "user",
-      "id": 2
-    },
-    {
-      "email": "yanakipot@gmail.com",
-      "password": "111111111111111Qq",
-      "user": "vzay",
-      "id": 3
-    },
-    {
-      "email": "vzay@isd.dp.ua",
-      "password": "1995Slz431315",
-      "user": "vzay",
-      "id": 4
-    },
-    {
-      "email": "q@q.com",
-      "password": "QqQq11",
-      "user": "user",
-      "id": 5
     }
   ],
   "bill": {
@@ -38,7 +14,7 @@
   "categories": [
     {
       "name": "Home",
-      "capacity": 10000,
+      "capacity": "15000",
       "id": 1
     },
     {
@@ -47,14 +23,24 @@
       "id": 2
     },
     {
-      "id": 3,
       "name": "Car",
-      "capacity": 7000
+      "capacity": 7000,
+      "id": 3
     },
     {
-      "id": 4,
       "name": "Healthy",
-      "capacity": 7000
+      "capacity": 7000,
+      "id": 4
+    },
+    {
+      "name": "Gift",
+      "capacity": 2000,
+      "id": 5
+    },
+    {
+      "name": "Pets",
+      "capacity": 5000,
+      "id": 6
     }
   ],
   "events": [
@@ -129,6 +115,34 @@
       "category": 4,
       "date": "2021-10-29T14:08:35.152Z",
       "description": "Массаж"
+    },
+    {
+      "category": "Healthy",
+      "type": "outcome",
+      "amount": "5000",
+      "description": "spa",
+      "date": "2021-11-01T11:50:35.629Z",
+      "id": 10
+    },
+    {
+      "category": "Products",
+      "type": "outcome",
+      "amount": "1500",
+      "description": "burger",
+      "date": "2021-11-01T11:52:45.363Z",
+      "id": 11
     }
-  ]
+  ],
+  "currency": {
+    "base": "base",
+    "date": "01.11.2021 12:01",
+    "rates": {
+      "UAH": 0.033,
+      "EUR": 1,
+      "USD": 0.86,
+      "BYN": 0.35
+    },
+    "success": true,
+    "timestamp": 1
+  }
 }

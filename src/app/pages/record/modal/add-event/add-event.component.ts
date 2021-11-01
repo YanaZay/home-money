@@ -13,12 +13,12 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AddEventComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
+  private destroy$: Subject<void> = new Subject<void>()
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories[],
     private dialogRef: MatDialogRef<AddEventComponent>,
     private recordService: RecordService,
-    private destroy$: Subject<void> = new Subject<void>()
   ) {}
 
   public ngOnInit(): void {
@@ -41,14 +41,14 @@ export class AddEventComponent implements OnInit, OnDestroy {
       this.recordService.addNewEvent(this.form.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe( () => {
-        // this.close(true);
+        this.close(true);
       })
     }
   }
 
-  // public close(isAdded: boolean): void {
-  //   this.dialogRef.close(isAdded);
-  // }
+  public close(isAdded: boolean): void {
+    this.dialogRef.close(isAdded);
+  }
 
   public ngOnDestroy(): void {
     this.destroy$.next();

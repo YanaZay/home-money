@@ -9,6 +9,7 @@ import { HighchartsChartModule } from "highcharts-angular";
 import { FlexModule } from '@angular/flex-layout';
 import { CardComponent } from './components/pages/card/card.component';
 import { MainPageComponent } from './components/pages/main-page/main-page.component';
+import { HistoryService } from './history.service';
 
 
 const routes: Routes = [
@@ -32,6 +33,9 @@ const routes: Routes = [
     MaterialModule,
     HighchartsChartModule,
     FlexModule
+  ],
+  providers: [
+    HistoryService
   ]
 })
 export class HistoryModule { }

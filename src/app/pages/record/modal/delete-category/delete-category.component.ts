@@ -12,11 +12,12 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DeleteCategoryComponent implements OnInit, OnDestroy {
   constructor(
-    private recordService: RecordService,
     @Inject(MAT_DIALOG_DATA) public data: ICategories,
+    private recordService: RecordService,
     private dialogRef: MatDialogRef<DeleteCategoryComponent>,
-    private destroy$: Subject<void> = new Subject<void>()
   ) {}
+
+  private destroy$: Subject<void> = new Subject<void>()
 
   ngOnInit(): void {
   }

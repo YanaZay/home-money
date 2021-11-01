@@ -21,6 +21,14 @@ export class RecordService {
   public addNewEvent(event: IEvents): Observable<{}> {
     return this.http.post<IEvents>(`${environment.apiHost}/events`, event)
   }
+
+  public addNewCategory(category: ICategories): Observable<{}> {
+    return this.http.post<ICategories>(`${environment.apiHost}/categories`, category)
+  }
+
+  public editCategory(id: number, body: {name: string, capacity: number}): Observable<{}> {
+    return this.http.put<ICategories>(`${environment.apiHost}/categories/${id}`, body)
+  }
 }
 
 // {

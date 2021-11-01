@@ -1,0 +1,25 @@
+<div class="edit-category-modal">
+  <h3 mat-dialog-title>Edit category</h3>
+  <form [formGroup]="form" (ngSubmit)="editCategory()">
+
+    <mat-form-field>
+      <mat-select>
+        <mat-option [value]="data.name" *ngFor="let item of categoryArray">{{item.name}}</mat-option>
+      </mat-select>
+      <mat-label>Choose category</mat-label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter the name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter the capacity" formControlName="capacity">
+    </mat-form-field>
+
+    <div mat-dialog-actions class="buttons">
+      <button mat-raised-button mat-dialog-close color="primary" [disabled]="form.invalid" type="submit">Edit</button>
+      <button mat-raised-button mat-dialog-close>Close</button>
+    </div>
+  </form>
+</div>

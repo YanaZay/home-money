@@ -1,20 +1,24 @@
-.add-event-modal {
-  height: 35vh;
-  width: 35vh;
+:host {
+  ::ng-deep {
+    .add-event-modal {
+      height: 30vh;
+      width: 35vh;
 
-  .mat-form-field {
-    width: 95%;
-  }
+      .mat-form-field {
+        width: 95%;
+      }
 
-  .radio-buttons {
-    .mat-radio-group {
-      .mat-radio-button {
-        margin-left: 1rem;
+      .radio-buttons {
+        .mat-radio-group {
+          .mat-radio-button {
+            margin-left: 1rem;
+          }
+        }
+      }
+
+      .buttons {
+        justify-content: end;
       }
     }
-  }
-
-  .buttons {
-    justify-content: end;
   }
 }

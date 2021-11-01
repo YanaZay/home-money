@@ -1,0 +1,14 @@
+:host {
+  ::ng-deep {
+    .edit-category-modal {
+
+      .mat-form-field {
+        width: 95%;
+      }
+
+      .buttons {
+        justify-content: end;
+      }
+    }
+  }
+}
