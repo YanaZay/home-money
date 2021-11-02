@@ -8,13 +8,11 @@ import { IExchangeInterface } from "../../shared/models/exchange.interface";
   providedIn: 'root'
 })
 export class BillService {
-
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   public getExchangeRates(): Observable<IExchangeInterface> {
     return this.http.get<IExchangeInterface>(`${environment.apiHost}/currency`)
   }
-
 }

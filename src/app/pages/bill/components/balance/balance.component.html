@@ -3,19 +3,19 @@
   <mat-list >
 
     <mat-list-item>
-      <mat-icon><img src="https://img.icons8.com/material-rounded/26/000000/euro-pound-exchange.png"/></mat-icon>
+      <mat-icon><img src="https://img.icons8.com/material-rounded/26/000000/euro-pound-exchange.png" alt="#"/></mat-icon>
       <span>{{bill | currency:'':''}}</span>
     </mat-list-item>
     <mat-divider></mat-divider>
 
     <mat-list-item>
-      <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/ukrainian-hryvnia.png"/></mat-icon>
+      <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/ukrainian-hryvnia.png" alt="#"/></mat-icon>
       <span>{{dataRates?.rates['UAH'] * bill | currency:'':''}}</span>
     </mat-list-item>
     <mat-divider></mat-divider>
 
     <mat-list-item>
-      <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/us-dollar.png" alt=""/></mat-icon>
+      <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/us-dollar.png" alt="#"/></mat-icon>
       <span>{{dataRates?.rates['USD'] * bill | currency:'':''}}</span>
     </mat-list-item>
     <mat-divider></mat-divider>

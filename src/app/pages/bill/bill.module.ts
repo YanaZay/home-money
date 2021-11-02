@@ -24,4 +24,4 @@ const routes: Routes = [{path: '', component: BillComponent,}];
     BillService
   ]
 })
-export class BillModule { }
+export class BillModule {}

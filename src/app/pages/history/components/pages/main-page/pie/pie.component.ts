@@ -8,8 +8,6 @@ import { IPartPie } from '../../../../../../shared/models/pie.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-
-
 @Component({
   selector: 'app-pie',
   templateUrl: './pie.component.html',
@@ -22,9 +20,7 @@ export class PieComponent implements OnInit, OnDestroy {
   public pieArray: IPartPie[] = [];
   private destroy$: Subject<void> =  new Subject<void>();
 
-  constructor(
-    private historyService: HistoryService
-  ) {}
+  constructor(private historyService: HistoryService) {}
 
   public ngOnInit(): void {
     this.getEvents();
@@ -77,7 +73,6 @@ export class PieComponent implements OnInit, OnDestroy {
     })
   }
 
-
   public viewCharts(): void {
      this.chartOptions = {
         chart: {
@@ -108,7 +103,6 @@ export class PieComponent implements OnInit, OnDestroy {
           pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            // colors: this.getColors(),
             dataLabels: {
               enabled: true,
               format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
@@ -130,20 +124,8 @@ export class PieComponent implements OnInit, OnDestroy {
     HC_exporting(Highcharts);
   }
 
-  public getColors (): any {
-    // let colors = [];
-    // let base = Highcharts.getOptions().colors[0];
-    //
-    // for (let i = 0; i < 10; i += 1) {
-    //
-    //   colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
-    // }
-    // return colors;
-  }
-
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

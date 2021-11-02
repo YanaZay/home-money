@@ -6,7 +6,6 @@ import { HeaderComponent } from './main-layout/component/header/header.component
 import { SidebarComponent } from './main-layout/component/sidebar/sidebar.component';
 import { MaterialModule } from './material.module';
 
-
 @NgModule({
   declarations: [
     MainLayoutComponent,
@@ -19,4 +18,4 @@ import { MaterialModule } from './material.module';
     MaterialModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

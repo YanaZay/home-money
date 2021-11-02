@@ -38,4 +38,4 @@ const routes: Routes = [
     HistoryService
   ]
 })
-export class HistoryModule { }
+export class HistoryModule {}

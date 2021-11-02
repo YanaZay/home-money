@@ -7,11 +7,9 @@ import {AuthService} from "../../../../pages/auth/auth.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  @Output() public toggle: EventEmitter<void> =  new EventEmitter<void>();
+  @Output() public toggle: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(
-    private authService: AuthService,
-  ) {}
+  constructor(private authService: AuthService,) {}
 
   public logout(): void {
     this.authService.login();

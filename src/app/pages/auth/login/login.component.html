@@ -1,9 +1,10 @@
 <div class="container">
   <mat-card-subtitle fxLayoutAlign="center">Login to work</mat-card-subtitle>
   <mat-card-subtitle class="afterReg" *ngIf="done" fxLayoutAlign="center">Registration completed successfully. Please log in.</mat-card-subtitle>
+
   <mat-card-content>
-    <small fxLayoutAlign="stretch" fxLayoutAlign="center" *ngIf="userError">No such user was found.</small>
-    <small fxLayoutAlign="stretch" fxLayoutAlign="center" *ngIf="passwordError">Wrong password.</small>
+    <small fxLayoutAlign="stretch center" *ngIf="userError">No such user was found.</small>
+    <small fxLayoutAlign="stretch center" *ngIf="passwordError">Wrong password.</small>
     <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="form" (ngSubmit)="login()">
       <mat-form-field appearance="legacy">
         <input matInput placeholder="Email" formControlName="email" autocomplete="username">
@@ -12,7 +13,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <input matInput id="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" autocomplete="current-password">
+        <input matInput id="password" [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" autocomplete="current-password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -29,7 +30,7 @@
     </form>
 
     <mat-card-footer fxLayoutAlign="center">Don't have an account?&nbsp;<a [routerLink]="['/registration']">Registration</a></mat-card-footer>
-
   </mat-card-content>
+
 </div>
 

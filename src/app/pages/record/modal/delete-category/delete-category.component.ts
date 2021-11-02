@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { RecordService } from '../../record.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICategories } from '../../../../shared/models/categories.interface';
@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './delete-category.component.html',
   styleUrls: ['./delete-category.component.scss']
 })
-export class DeleteCategoryComponent implements OnInit, OnDestroy {
+export class DeleteCategoryComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories,
     private recordService: RecordService,
@@ -18,9 +18,6 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
   ) {}
 
   private destroy$: Subject<void> = new Subject<void>()
-
-  ngOnInit(): void {
-  }
 
   public deleteCategory(): void {
     this.recordService.deleteCategory(this.data.id)

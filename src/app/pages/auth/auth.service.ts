@@ -9,7 +9,6 @@ import { Router } from "@angular/router";
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(
     private http: HttpClient,
     private router: Router
@@ -19,17 +18,7 @@ export class AuthService {
     return this.http.post<IUser>(`${environment.apiHost}/users`, user);
   }
 
-
   public checkUser(email: string): Observable<IUser[]> {
-    const headerDict = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    }
-
-    const requestOptions = {
-      headers: new Headers(headerDict),
-    };
     return this.http.get<IUser[]>(`${environment.apiHost}/users?email=${email}`);
   }
 

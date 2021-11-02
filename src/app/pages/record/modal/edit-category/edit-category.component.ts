@@ -1,19 +1,22 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICategories } from '../../../../shared/models/categories.interface';
 import { HistoryService } from '../../../history/history.service';
 import { RecordService } from '../../record.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
   styleUrls: ['./edit-category.component.scss']
 })
-export class EditCategoryComponent implements OnInit {
+export class EditCategoryComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public categoryArray!: ICategories[];
   public value!: ICategories;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories,
@@ -35,7 +38,9 @@ export class EditCategoryComponent implements OnInit {
   }
 
   public getDataCategory(): void {
-    this.historyService.getCategories().subscribe(data => {
+    this.historyService.getCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
       this.categoryArray = data;
     })
   }
@@ -45,12 +50,11 @@ export class EditCategoryComponent implements OnInit {
       name: new FormControl(this.value.name, [Validators.required]),
       capacity: new FormControl(this.value.capacity, [Validators.required])
     })
-    console.log(this.value)
   }
 
   public editCategory(): void {
     if (this.form.valid) {
-      this.recordService.editCategory(1, this.form.value).subscribe(() => {
+      this.recordService.editCategory(this.value.id, this.form.value).subscribe(() => {
         this.close(true);
       })
     }
@@ -58,5 +62,15 @@ export class EditCategoryComponent implements OnInit {
 
   public close(isEdited: boolean): void {
     this.dialogRef.close(isEdited);
+  }
+
+  public changeCategory(event: any): void {
+    this.value = this.categoryArray.find( category => category.name === event.value)!;
+    this.buildForm();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

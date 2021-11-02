@@ -23,24 +23,14 @@
       "id": 2
     },
     {
-      "name": "Car",
-      "capacity": 7000,
+      "name": "Cars",
+      "capacity": "7500",
       "id": 3
     },
     {
+      "id": 4,
       "name": "Healthy",
-      "capacity": 7000,
-      "id": 4
-    },
-    {
-      "name": "Gift",
-      "capacity": 2000,
-      "id": 5
-    },
-    {
-      "name": "Pets",
-      "capacity": 5000,
-      "id": 6
+      "capacity": 7000
     }
   ],
   "events": [
@@ -131,16 +121,24 @@
       "description": "burger",
       "date": "2021-11-01T11:52:45.363Z",
       "id": 11
+    },
+    {
+      "category": "Cats",
+      "type": "outcome",
+      "amount": "200",
+      "description": "Cats eat",
+      "date": "2021-11-02T11:12:43.787Z",
+      "id": 12
     }
   ],
   "currency": {
     "base": "base",
     "date": "01.11.2021 12:01",
     "rates": {
-      "UAH": 0.033,
+      "UAH": 30.44,
       "EUR": 1,
-      "USD": 0.86,
-      "BYN": 0.35
+      "USD": 1.16,
+      "BYN": 2.82
     },
     "success": true,
     "timestamp": 1

@@ -6,7 +6,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AddEventComponent } from '../../../../../record/modal/add-event/add-event.component';
 
 @Component({
@@ -38,13 +38,13 @@ export class TableComponent implements OnInit, OnDestroy {
     this.historyService.getEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe((events:IEvents[]) => {
-          this.eventArray = events;
-          currentValue = events;
+        this.eventArray = events;
+        currentValue = events;
 
-          this.dataSource = new MatTableDataSource(events);
-          this.dataSource.paginator = this.paginator;
-        }
-      );
+        this.dataSource = new MatTableDataSource(events);
+        this.dataSource.paginator = this.paginator;
+      }
+    );
 
     this.historyService.getCategories()
       .pipe(takeUntil(this.destroy$))

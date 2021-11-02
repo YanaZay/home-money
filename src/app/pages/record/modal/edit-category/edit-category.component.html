@@ -3,8 +3,8 @@
   <form [formGroup]="form" (ngSubmit)="editCategory()">
 
     <mat-form-field>
-      <mat-select>
-        <mat-option [value]="data.name" *ngFor="let item of categoryArray">{{item.name}}</mat-option>
+      <mat-select [(value)]="value.name" (selectionChange)="changeCategory($event)">
+        <mat-option [value]="item.name" *ngFor="let item of categoryArray">{{item.name}}</mat-option>
       </mat-select>
       <mat-label>Choose category</mat-label>
     </mat-form-field>

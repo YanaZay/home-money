@@ -4,7 +4,6 @@ import { RecordService } from '../../record.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ICategories } from '../../../../shared/models/categories.interface';
 
 @Component({
   selector: 'app-add-category',
@@ -34,7 +33,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   public addCategory(): void {
     if (this.form.valid) {
       this.recordService.addNewCategory(this.form.value)
-        // .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
           this.close(true);
         })

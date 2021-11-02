@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AddEventComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
-  private destroy$: Subject<void> = new Subject<void>()
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories[],

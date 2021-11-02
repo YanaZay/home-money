@@ -1,8 +1,6 @@
 <div class="add-event-modal">
   <h2 mat-dialog-title>Add new record</h2>
-
   <form [formGroup]="form" (ngSubmit)="addNewEvent()">
-
     <mat-form-field>
       <mat-select formControlName="category">
         <mat-option value="{{item.name}}" *ngFor="let item of data; let i = index">{{item.name}}</mat-option>
@@ -30,8 +28,6 @@
       <button mat-raised-button mat-dialog-close color="primary" type="submit" [disabled]="form.invalid">Add</button>
       <button mat-raised-button mat-dialog-close>Close</button>
     </div>
-
   </form>
-
 </div>
 

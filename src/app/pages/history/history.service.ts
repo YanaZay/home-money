@@ -11,9 +11,7 @@ import { ICategories } from '../../shared/models/categories.interface';
 export class HistoryService {
   public changeHistoryTitle: Subject<number> = new Subject<number>();
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   public getEvents(): Observable<IEvents[]> {
     return this.http.get<IEvents[]>(`${environment.apiHost}/events`);

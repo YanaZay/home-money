@@ -18,7 +18,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   public start: number = 0;
   public dataSource!: ICategories[];
   public displayedColumns: string [] = ['id', 'name', 'capacity', 'button'];
-  private destroy$: Subject<void> = new Subject<void>()
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private service: HistoryService,

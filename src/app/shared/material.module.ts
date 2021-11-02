@@ -17,7 +17,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 
-
 const COMPONENTS = [
   MatFormFieldModule,
   MatInputModule,
@@ -47,4 +46,4 @@ const COMPONENTS = [
     ...COMPONENTS
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {}

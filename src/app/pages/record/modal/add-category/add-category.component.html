@@ -1,8 +1,6 @@
 <div class="add-category-modal">
   <h2>Add new category</h2>
-
   <form [formGroup]="form" (ngSubmit)="addCategory()">
-
     <div class="input-name">
       <mat-form-field appearance="legacy">
         <mat-label>Enter the name of category"</mat-label>
@@ -21,6 +19,5 @@
       <button mat-raised-button mat-dialog-close color="primary" type="submit" [disabled]="form.invalid">Add</button>
       <button mat-raised-button mat-dialog-close>Close</button>
     </div>
-
   </form>
 </div>

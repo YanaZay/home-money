@@ -39,4 +39,4 @@ const routes: Routes = [
     HistoryService
   ]
 })
-export class RecordModule { }
+export class RecordModule {}

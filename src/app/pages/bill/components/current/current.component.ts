@@ -12,8 +12,6 @@ export class CurrentComponent implements OnInit {
   public displayedColumns: string[] = ['currency', 'rates', 'date'];
   public currentCourse: ICurrentExchangeInterface[] = [];
 
-  constructor() {
-  }
 
   public ngOnInit(): void {
     for (let item in this.dataRates.rates) {

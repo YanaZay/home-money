@@ -14,7 +14,7 @@ export class BillComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private billService: BillService) { }
+  constructor(private billService: BillService) {}
 
   ngOnInit(): void {
     this.getData();
@@ -30,7 +30,6 @@ export class BillComponent implements OnInit, OnDestroy {
   }
 
   private getData(): void {
-    // this.loading = true;
     this.billService.getExchangeRates()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:IExchangeInterface) => {
