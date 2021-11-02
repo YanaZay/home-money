@@ -2,10 +2,9 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICategories } from '../../../../shared/models/categories.interface';
-import { HistoryService } from '../../../history/history.service';
 import { RecordService } from '../../record.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { pipe, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-category',
@@ -14,47 +13,28 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class EditCategoryComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
-  public categoryArray!: ICategories[];
-  public value!: ICategories;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ICategories,
-    private historyService: HistoryService,
+    @Inject(MAT_DIALOG_DATA) public data: {category: ICategories, categoryArray: ICategories[]},
     private recordService: RecordService,
     private dialogRef: MatDialogRef<EditCategoryComponent>
   ) {}
 
   public ngOnInit(): void {
-    this.getDataCategory();
-    this.assignData();
-  }
-
-  public assignData(): void {
-    if (this.data) {
-      this.value = Object.assign({}, this.data)
-      this.buildForm();
-    }
-  }
-
-  public getDataCategory(): void {
-    this.historyService.getCategories()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
-      this.categoryArray = data;
-    })
-  }
-
-  public buildForm(): void {
-    this.form = new FormGroup({
-      name: new FormControl(this.value.name, [Validators.required]),
-      capacity: new FormControl(this.value.capacity, [Validators.required])
-    })
+    this.buildForm();
   }
 
   public editCategory(): void {
+    console.log(this.form.value)
+    const id = this.form.value.categoryId;
     if (this.form.valid) {
-      this.recordService.editCategory(this.value.id, this.form.value).subscribe(() => {
+      delete this.form.value.categoryId;
+      console.log(this.form.value)
+
+      this.recordService.editCategory(id, this.form.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
         this.close(true);
       })
     }
@@ -64,13 +44,25 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     this.dialogRef.close(isEdited);
   }
 
-  public changeCategory(event: any): void {
-    this.value = this.categoryArray.find( category => category.name === event.value)!;
-    this.buildForm();
-  }
-
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private buildForm(): void {
+    this.form = new FormGroup({
+      categoryId: new FormControl(this.data.category.id),
+      name: new FormControl(this.data.category.name, [Validators.required]),
+      capacity: new FormControl(this.data.category.capacity, [Validators.required])
+    })
+
+    this.form.get('categoryId')?.valueChanges.subscribe(value => {
+      const category = this.data.categoryArray.find((category: ICategories) => category.id === value)!;
+      this.changeValue(category)
+    })
+  }
+
+  private changeValue(category: ICategories): void {
+    this.form.patchValue(category);
   }
 }

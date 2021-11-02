@@ -72,8 +72,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   public editCategory(category: ICategories): void {
-    const dialogRef = this.matDialog.open<EditCategoryComponent>(EditCategoryComponent, {data: category});
-
+    const dialogRef = this.matDialog.open<EditCategoryComponent>(EditCategoryComponent, {data: {category, categoryArray: this.dataSource}});
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
         this._getData()

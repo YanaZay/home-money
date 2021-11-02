@@ -24,13 +24,23 @@
     },
     {
       "name": "Cars",
-      "capacity": "7500",
+      "capacity": 75005,
       "id": 3
     },
     {
-      "id": 4,
-      "name": "Healthy",
-      "capacity": 7000
+      "name": "Cats",
+      "capacity": 15000,
+      "id": 4
+    },
+    {
+      "name": "Travel",
+      "capacity": 20005,
+      "id": 5
+    },
+    {
+      "name": "Gifts",
+      "capacity": 50005,
+      "id": 6
     }
   ],
   "events": [
