@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICategories } from '../../../../shared/models/categories.interface';
 import { RecordService } from '../../record.service';
-import { pipe, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-category',
@@ -26,11 +26,9 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
   }
 
   public editCategory(): void {
-    console.log(this.form.value)
     const id = this.form.value.categoryId;
     if (this.form.valid) {
       delete this.form.value.categoryId;
-      console.log(this.form.value)
 
       this.recordService.editCategory(id, this.form.value)
         .pipe(takeUntil(this.destroy$))
@@ -56,7 +54,9 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
       capacity: new FormControl(this.data.category.capacity, [Validators.required])
     })
 
-    this.form.get('categoryId')?.valueChanges.subscribe(value => {
+    this.form.get('categoryId')?.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
       const category = this.data.categoryArray.find((category: ICategories) => category.id === value)!;
       this.changeValue(category)
     })

@@ -1,8 +1,6 @@
 :host {
   ::ng-deep {
     .add-event-modal {
-      height: 30vh;
-      width: 35vh;
 
       .mat-form-field {
         width: 95%;
@@ -15,7 +13,6 @@
           }
         }
       }
-
       .buttons {
         justify-content: end;
       }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {AuthService} from "../../../../pages/auth/auth.service";
+import { AuthService } from "../../../../pages/auth/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ import {AuthService} from "../../../../pages/auth/auth.service";
 export class HeaderComponent {
   @Output() public toggle: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private authService: AuthService,) {}
+  constructor(private authService: AuthService) {}
 
   public logout(): void {
     this.authService.login();

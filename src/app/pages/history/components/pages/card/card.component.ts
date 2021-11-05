@@ -25,7 +25,6 @@ export class CardComponent implements OnInit, OnDestroy {
     this.route.params
       .pipe(takeUntil(this.destroy$))
       .subscribe( (params: Params) => {
-        console.log(params)
         this.id = params ? +params.id : null!;
         this.historyService.changeHistoryTitle.next(this.id);
     })
@@ -48,8 +47,6 @@ export class CardComponent implements OnInit, OnDestroy {
       this.historyService.getCategories()
         .pipe(takeUntil(this.destroy$))
         .subscribe((categories: ICategories[]) => {
-          console.log(this.currentEvent)
-          console.log(categories)
           for (let cat of categories) {
             this.currentEvent.category === cat.id ? this.currentEvent.category = cat.name : null;
           }

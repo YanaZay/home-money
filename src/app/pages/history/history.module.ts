@@ -11,7 +11,6 @@ import { CardComponent } from './components/pages/card/card.component';
 import { MainPageComponent } from './components/pages/main-page/main-page.component';
 import { HistoryService } from './history.service';
 
-
 const routes: Routes = [
   {path: '', component: HistoryComponent, children: [
     {path: '', component: MainPageComponent},

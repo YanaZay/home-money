@@ -25,16 +25,6 @@ export class AddEventComponent implements OnInit, OnDestroy {
     this.buildForm();
   }
 
-  private buildForm(): void {
-    this.form = new FormGroup({
-      category: new FormControl(null, [Validators.required]),
-      type: new FormControl(null, [Validators.required]),
-      amount: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.required]),
-      date: new FormControl(new Date())
-    })
-  }
-
   public addNewEvent(): void {
     if (this.form.valid) {
       console.log(this.form.value)
@@ -53,5 +43,15 @@ export class AddEventComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private buildForm(): void {
+    this.form = new FormGroup({
+      category: new FormControl('', [Validators.required]),
+      type: new FormControl('', [Validators.required]),
+      amount: new FormControl(null, [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      date: new FormControl(new Date())
+    })
   }
 }

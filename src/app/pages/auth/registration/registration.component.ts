@@ -24,6 +24,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.buildForm();
+  }
+
+  public buildForm(): void {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [

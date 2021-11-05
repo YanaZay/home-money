@@ -15,14 +15,14 @@ import { AddEventComponent } from '../../../../../record/modal/add-event/add-eve
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy {
+  @Output() public onCard: EventEmitter<IEvents> = new EventEmitter<IEvents>();
+  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
+  @Inject(MAT_DIALOG_DATA) public data!: ICategories[];
   public eventArray!: IEvents[];
   public categoryArray!: ICategories[];
   public dataSource!: MatTableDataSource<IEvents>;
   public displayedColumns: string[] = ['id', 'amount', 'date', 'category', 'type', 'action'];
   private destroy$: Subject<void> = new Subject<void>();
-  @Output() public onCard: EventEmitter<IEvents> = new EventEmitter<IEvents>();
-  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
-  @Inject(MAT_DIALOG_DATA) public data!: ICategories[];
 
   constructor(
     private matDialog: MatDialog,
@@ -58,7 +58,7 @@ export class TableComponent implements OnInit, OnDestroy {
       })
   }
 
-  public applyFilter(event: Event) {
+  public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

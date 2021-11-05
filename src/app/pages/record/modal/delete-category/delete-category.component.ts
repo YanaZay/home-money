@@ -11,13 +11,13 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./delete-category.component.scss']
 })
 export class DeleteCategoryComponent implements OnDestroy {
+  private destroy$: Subject<void> = new Subject<void>();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories,
     private recordService: RecordService,
     private dialogRef: MatDialogRef<DeleteCategoryComponent>,
   ) {}
-
-  private destroy$: Subject<void> = new Subject<void>()
 
   public deleteCategory(): void {
     this.recordService.deleteCategory(this.data.id)

@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (this.receivedUser === undefined || this.receivedUser === null) {
           this.userError = true;
           setTimeout(() => {this.userError = false}, 5000);
-          return
+          return;
         }
         if (this.form.value.password !== this.receivedUser.password) {
           this.passwordError = true;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }

@@ -16,7 +16,7 @@ export class BillComponent implements OnInit, OnDestroy {
 
   constructor(private billService: BillService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getData();
   }
 

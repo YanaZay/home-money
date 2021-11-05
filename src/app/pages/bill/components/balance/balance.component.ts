@@ -11,6 +11,7 @@ import { IExchangeInterface } from '../../../../shared/models/exchange.interface
   templateUrl: './balance.component.html',
   styleUrls: ['./balance.component.scss']
 })
+
 export class BalanceComponent implements OnInit, OnDestroy {
   @Input() public dataRates!: IExchangeInterface;
   public bill!: number;

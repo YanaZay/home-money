@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AddCategoryComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
-  private destroy$: Subject<void> = new Subject<void>()
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private recordService: RecordService,
@@ -25,7 +25,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 
   public buildForm(): void {
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       capacity: new FormControl(null, [Validators.required])
     })
   }
@@ -41,7 +41,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   public close(isAdded: boolean): void {
-    this.dialogRef.close(isAdded)
+    this.dialogRef.close(isAdded);
   }
 
   public ngOnDestroy(): void {

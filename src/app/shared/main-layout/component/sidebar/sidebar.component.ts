@@ -9,7 +9,7 @@ import { IUser } from '../../../models/user.interface';
 export class SidebarComponent implements OnInit {
   public user!: IUser;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.user = JSON.parse(<string>localStorage.getItem('user'));
   }
 }

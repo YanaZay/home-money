@@ -1,19 +1,17 @@
 <div class="add-category-modal">
   <h2>Add new category</h2>
   <form [formGroup]="form" (ngSubmit)="addCategory()">
-    <div class="input-name">
-      <mat-form-field appearance="legacy">
-        <mat-label>Enter the name of category"</mat-label>
-        <input matInput type="text" formControlName="name">
-      </mat-form-field>
-    </div>
 
-    <div class="input-capacity">
-      <mat-form-field appearance="legacy">
-        <mat-label>Enter the capacity</mat-label>
-        <input type="number" matInput formControlName="capacity">
-      </mat-form-field>
-    </div>
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter the name of category"</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter the capacity</mat-label>
+      <input type="number" matInput formControlName="capacity">
+    </mat-form-field>
 
     <div mat-dialog-actions class="buttons">
       <button mat-raised-button mat-dialog-close color="primary" type="submit" [disabled]="form.invalid">Add</button>
