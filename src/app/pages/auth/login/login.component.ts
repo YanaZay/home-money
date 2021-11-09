@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../shared/models/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay, mergeAll, mergeMap, takeUntil } from 'rxjs/operators';
-import { of, Subject, timer } from 'rxjs';
+import { delay, takeUntil } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
