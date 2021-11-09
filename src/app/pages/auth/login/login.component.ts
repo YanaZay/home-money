@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../shared/models/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { Subject, timer } from 'rxjs';
+import { delay, mergeAll, mergeMap, takeUntil } from 'rxjs/operators';
+import { of, Subject, timer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -35,9 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe(params => {
       this.done = !!params.done;
     });
-    timer(3000).subscribe( () => {
-      this.done = false;
-    });
+    of(this.done).pipe(delay(3000)).subscribe( () => {this.done = false});
   }
 
   public login(): void {
@@ -49,16 +47,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
           this.userError = true;
-          timer(5000).subscribe( () => {
-            this.userError = false
-          });
+          of(this.userError).pipe(delay(3000)).subscribe( () => {this.userError = false});
           return
         }
         if (this.form.value.password !== this.receivedUser.password) {
           this.passwordError = true;
-          timer(5000).subscribe( () => {
-            this.passwordError = false
-          });
+          of(this.passwordError).pipe(delay(3000)).subscribe( () => {this.passwordError = false});
           return;
         }
         if (this.form.value.password === this.receivedUser.password) {
