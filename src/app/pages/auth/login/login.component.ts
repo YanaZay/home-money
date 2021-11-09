@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.done = !!params.done;
     });
     timer(3000).subscribe( () => {
-      this.done = false
+      this.done = false;
     });
   }
 
