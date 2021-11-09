@@ -5,12 +5,6 @@
       "email": "yana@mail.com",
       "password": "12345678aA",
       "name": "Администратор"
-    },
-    {
-      "email": "vanya@mail.com",
-      "password": "12Qq111111111111",
-      "user": "1500",
-      "id": 2
     }
   ],
   "bill": {
@@ -29,7 +23,7 @@
       "id": 2
     },
     {
-      "name": "Car",
+      "name": "Cars",
       "capacity": 7500,
       "id": 3
     },
@@ -42,11 +36,6 @@
       "name": "Travel",
       "capacity": 2000,
       "id": 5
-    },
-    {
-      "name": "Gifts",
-      "capacity": 50005,
-      "id": 6
     }
   ],
   "events": [

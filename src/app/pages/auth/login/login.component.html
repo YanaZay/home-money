@@ -3,8 +3,9 @@
   <mat-card-subtitle class="afterReg" *ngIf="done" fxLayoutAlign="center">Registration completed successfully. Please log in.</mat-card-subtitle>
 
   <mat-card-content>
-    <small fxLayoutAlign="stretch center" *ngIf="userError">No such user was found.</small>
-    <small fxLayoutAlign="stretch center" *ngIf="passwordError">Wrong password.</small>
+
+    <small *ngIf="userError">No such user was found.</small>
+    <small *ngIf="passwordError">Wrong password.</small>
     <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="form" (ngSubmit)="login()">
       <mat-form-field appearance="legacy">
         <input matInput placeholder="Email" formControlName="email" autocomplete="username">

@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { IUser } from '../../../shared/models/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, timer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe(params => {
       this.done = !!params.done;
     });
-    setTimeout(() => {this.done = false}, 3000);
+    timer(3000).subscribe( () => {
+      this.done = false
+    });
   }
 
   public login(): void {
@@ -47,12 +49,16 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
           this.userError = true;
-          setTimeout(() => {this.userError = false}, 5000);
-          return;
+          timer(5000).subscribe( () => {
+            this.userError = false
+          });
+          return
         }
         if (this.form.value.password !== this.receivedUser.password) {
           this.passwordError = true;
-          setTimeout(() => {this.passwordError = false}, 5000);
+          timer(5000).subscribe( () => {
+            this.passwordError = false
+          });
           return;
         }
         if (this.form.value.password === this.receivedUser.password) {
@@ -63,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
