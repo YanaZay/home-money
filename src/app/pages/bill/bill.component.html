@@ -10,7 +10,7 @@
 <div *ngIf="loading" class="loading"><h3>Loading...</h3></div>
 <div *ngIf="!loading" class="content">
   <div class="component-1">
-    <app-balance *ngIf="rates" [dataRates]="rates" [dataBill]="bill"></app-balance>
+    <app-balance *ngIf="rates" [dataRates]="rates"></app-balance>
   </div>
   <div class="component-2">
     <app-current *ngIf="rates" [dataRates]="rates"></app-current>
