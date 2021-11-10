@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../shared/models/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay, takeUntil } from 'rxjs/operators';
+import {delay, takeUntil} from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 
 @Component({
@@ -63,7 +63,20 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  // public errorDelay(value: boolean): void {
+  //   if () {
+  //     this.userError = true;
+  //     of(this.userError).pipe(delay(3000)).subscribe( () => {this.userError = false});
+  //     return
+  //   }
+  //   if (this.passwordError == value) {
+  //     this.passwordError = true;
+  //     of(this.passwordError).pipe(delay(3000)).subscribe( () => {this.passwordError = false});
+  //     return
+  //   }
+  // }
+
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }

@@ -20,16 +20,12 @@ export class BillComponent implements OnInit, OnDestroy {
     this.getData();
   }
 
-  public refresh(): void {
-    this.getData();
-  }
-
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  private getData(): void {
+  public getData(): void {
     this.billService.getExchangeRates()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data:IExchangeInterface) => {
