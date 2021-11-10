@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BillService } from "./bill.service";
 import { IExchangeInterface } from "../../shared/models/exchange.interface";
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { IBill } from "../../shared/models/bill.interface";
 
 @Component({
   selector: 'app-bill',
@@ -11,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class BillComponent implements OnInit, OnDestroy {
   public rates!: IExchangeInterface;
+  public bill!: IBill;
   public loading: boolean = true;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -20,17 +22,21 @@ export class BillComponent implements OnInit, OnDestroy {
     this.getData();
   }
 
+  public getData(): void {
+    forkJoin([
+      this.billService.getExchangeRates(),
+      this.billService.getBill()
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([ratesData, billData]: [IExchangeInterface, IBill]) => {
+      this.rates = ratesData;
+      this.bill = billData;
+      this.loading = false;
+    })
+  }
+
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  public getData(): void {
-    this.billService.getExchangeRates()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data:IExchangeInterface) => {
-        this.rates = data;
-        this.loading = false;
-      })
   }
 }

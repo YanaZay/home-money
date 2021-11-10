@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICurrentExchangeInterface } from '../../../../shared/models/exchange.interface';
+import {ICurrentExchangeInterface, IExchangeInterface} from '../../../../shared/models/exchange.interface';
 
 @Component({
   selector: 'app-current',
@@ -7,7 +7,7 @@ import { ICurrentExchangeInterface } from '../../../../shared/models/exchange.in
   styleUrls: ['./current.component.scss']
 })
 export class CurrentComponent implements OnInit {
-  @Input() public dataRates!: any;
+  @Input() public dataRates!: IExchangeInterface;
   public currency: string[] = ['EUR', 'USD', 'UAH'];
   public displayedColumns: string[] = ['currency', 'rates', 'date'];
   public currentCourse: ICurrentExchangeInterface[] = [];

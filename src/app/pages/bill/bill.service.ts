@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
 import { IExchangeInterface } from "../../shared/models/exchange.interface";
+import { IBill } from "../../shared/models/bill.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -13,4 +14,9 @@ export class BillService {
   public getExchangeRates(): Observable<IExchangeInterface> {
     return this.http.get<IExchangeInterface>(`${environment.apiHost}/currency`);
   }
+
+  public getBill(): Observable<IBill> {
+    return this.http.get<IBill>(`${environment.apiHost}/bill`);
+  }
 }
+

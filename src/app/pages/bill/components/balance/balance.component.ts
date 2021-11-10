@@ -1,9 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../../../environments/environment";
+import { Component, Input } from '@angular/core';
 import { IBill } from "../../../../shared/models/bill.interface";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 import { IExchangeInterface } from '../../../../shared/models/exchange.interface';
 
 @Component({
@@ -12,23 +8,7 @@ import { IExchangeInterface } from '../../../../shared/models/exchange.interface
   styleUrls: ['./balance.component.scss']
 })
 
-export class BalanceComponent implements OnInit, OnDestroy {
+export class BalanceComponent {
   @Input() public dataRates!: IExchangeInterface;
-  public bill!: number;
-  private destroy$: Subject<void> = new Subject<void>();
-
-  constructor(private http: HttpClient) {}
-
-  public ngOnInit(): void {
-    this.http.get<IBill>(`${environment.apiHost}/bill`)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data:IBill) => {
-      this.bill = data.value;
-    })
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  @Input() public dataBill!: IBill;
 }
