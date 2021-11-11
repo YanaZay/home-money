@@ -15,9 +15,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   @Output() public isAuth : EventEmitter<boolean> = new EventEmitter<boolean>();
   public form!: FormGroup;
   public done: boolean = false;
-  public userError: boolean = false;
   public hide: boolean = true;
-  public passwordError: boolean = false;
+  public errorMessage: string = '';
   private receivedUser: IUser | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -28,11 +27,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.buildForm();
+  }
+
+  public buildForm(): void {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
       this.done = !!params.done;
     });
     of(this.done).pipe(delay(3000)).subscribe( () => {this.done = false});
@@ -46,13 +51,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe( (data:IUser[]) => {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
-          this.userError = true;
-          of(this.userError).pipe(delay(3000)).subscribe( () => {this.userError = false});
+          this.delayError('No such user was found.')
           return
         }
         if (this.form.value.password !== this.receivedUser.password) {
-          this.passwordError = true;
-          of(this.passwordError).pipe(delay(3000)).subscribe( () => {this.passwordError = false});
+          this.delayError('Wrong password.');
           return;
         }
         if (this.form.value.password === this.receivedUser.password) {
@@ -63,18 +66,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  // public errorDelay(value: boolean): void {
-  //   if () {
-  //     this.userError = true;
-  //     of(this.userError).pipe(delay(3000)).subscribe( () => {this.userError = false});
-  //     return
-  //   }
-  //   if (this.passwordError == value) {
-  //     this.passwordError = true;
-  //     of(this.passwordError).pipe(delay(3000)).subscribe( () => {this.passwordError = false});
-  //     return
-  //   }
-  // }
+  public delayError(message: string): void {
+    this.errorMessage = message;
+    of(this.errorMessage).pipe(delay(3000)).subscribe( () => {
+      this.errorMessage = '';
+    });
+  }
 
   public ngOnDestroy(): void {
     this.destroy$.next();

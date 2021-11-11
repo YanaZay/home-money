@@ -5,6 +5,18 @@
       "email": "yana@mail.com",
       "password": "12345678aA",
       "name": "Администратор"
+    },
+    {
+      "email": "vanya@mail.com",
+      "password": "123Vanya",
+      "user": "vanya",
+      "id": 2
+    },
+    {
+      "email": "q@q.com",
+      "password": "Qq1111111",
+      "user": "11qq",
+      "id": 3
     }
   ],
   "bill": {
