@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ICurrentExchangeInterface, IExchangeInterface} from '../../../../shared/models/exchange.interface';
+import { ICurrentExchangeInterface, IExchangeInterface } from '../../../../shared/models/exchange.interface';
 
 @Component({
   selector: 'app-current',
