@@ -4,8 +4,7 @@
 
   <mat-card-content>
 
-    <small *ngIf="userError">No such user was found.</small>
-    <small *ngIf="passwordError">Wrong password.</small>
+    <small *ngIf="errorMessage">{{errorMessage}}</small>
     <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="form" (ngSubmit)="login()">
       <mat-form-field appearance="legacy">
         <input matInput placeholder="Email" formControlName="email" autocomplete="username">

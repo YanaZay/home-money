@@ -15,9 +15,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   @Output() public isAuth : EventEmitter<boolean> = new EventEmitter<boolean>();
   public form!: FormGroup;
   public done: boolean = false;
-  public userError: boolean = false;
   public hide: boolean = true;
+  public userError: boolean = false;
   public passwordError: boolean = false;
+  public errorMessage: string = '';
   private receivedUser: IUser | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -46,13 +47,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe( (data:IUser[]) => {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
-          this.userError = this.errorDelay();
-          console.log(this.userError);
+          this.errorDelay('No such user was found.')
           return
         }
         if (this.form.value.password !== this.receivedUser.password) {
-          this.passwordError = true;
-          of(this.passwordError).pipe(delay(3000)).subscribe( () => {this.passwordError = false});
+          this.errorDelay('Wrong password.');
           return;
         }
         if (this.form.value.password === this.receivedUser.password) {
@@ -63,9 +62,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  public errorDelay(): boolean {
-    let b: boolean = true;
-    of().pipe(delay(3000)).subscribe( () => {return b = false});
+  public errorDelay(message: string): void {
+    this.errorMessage = message;
+    of(this.errorMessage).pipe(delay(3000)).subscribe( () => {
+      this.errorMessage = '';
+    });
   }
 
   public ngOnDestroy(): void {
