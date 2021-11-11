@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe( (data:IUser[]) => {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
-          this.userError = true;
-          of(this.userError).pipe(delay(3000)).subscribe( () => {this.userError = false});
+          this.userError = this.errorDelay();
+          console.log(this.userError);
           return
         }
         if (this.form.value.password !== this.receivedUser.password) {
@@ -63,18 +63,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  // public errorDelay(value: boolean): void {
-  //   if () {
-  //     this.userError = true;
-  //     of(this.userError).pipe(delay(3000)).subscribe( () => {this.userError = false});
-  //     return
-  //   }
-  //   if (this.passwordError == value) {
-  //     this.passwordError = true;
-  //     of(this.passwordError).pipe(delay(3000)).subscribe( () => {this.passwordError = false});
-  //     return
-  //   }
-  // }
+  public errorDelay(): boolean {
+    let b: boolean = true;
+    of().pipe(delay(3000)).subscribe( () => {return b = false});
+  }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
