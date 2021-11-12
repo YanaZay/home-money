@@ -1,0 +1,151 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "yana@mail.com",
+      "password": "12345678aA",
+      "name": "Администратор"
+    }
+  ],
+  "bill": {
+    "value": 100200,
+    "currency": "EUR"
+  },
+  "categories": [
+    {
+      "name": "Home",
+      "capacity": "15000",
+      "id": 1
+    },
+    {
+      "name": "Products",
+      "capacity": 10000,
+      "id": 2
+    },
+    {
+      "name": "Cars",
+      "capacity": 7500,
+      "id": 3
+    },
+    {
+      "name": "Cats",
+      "capacity": 15000,
+      "id": 4
+    },
+    {
+      "name": "Travel",
+      "capacity": 2000,
+      "id": 5
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "type": "income",
+      "amount": 1250,
+      "category": 2,
+      "date": "2021-10-21T11:08:35.152Z",
+      "description": "Подарили еду в гостях"
+    },
+    {
+      "id": 2,
+      "type": "outcome",
+      "amount": 1300,
+      "category": 1,
+      "date": "2021-10-22T12:08:35.152Z",
+      "description": "Купил посудомоечную машину"
+    },
+    {
+      "id": 3,
+      "type": "income",
+      "amount": 1480,
+      "category": 2,
+      "date": "2021-10-23T13:08:35.152Z",
+      "description": "Поход в окей с баллами. Бесплатная еда"
+    },
+    {
+      "id": 4,
+      "type": "outcome",
+      "amount": 2470,
+      "category": 2,
+      "date": "2021-10-24T14:08:35.152Z",
+      "description": "Закупка на неделю"
+    },
+    {
+      "id": 5,
+      "type": "outcome",
+      "amount": 4000,
+      "category": 3,
+      "date": "2021-10-25T15:08:35.152Z",
+      "description": "Заправка + проход ТО"
+    },
+    {
+      "id": 6,
+      "type": "outcome",
+      "amount": 1300,
+      "category": 3,
+      "date": "2021-10-26T16:08:35.152Z",
+      "description": "Купил машину"
+    },
+    {
+      "id": 7,
+      "type": "outcome",
+      "amount": 1355,
+      "category": 3,
+      "date": "2021-10-27T17:08:35.152Z",
+      "description": "Закупка на неделю"
+    },
+    {
+      "id": 8,
+      "type": "outcome",
+      "amount": 1355,
+      "category": 4,
+      "date": "2021-10-28T18:08:35.152Z",
+      "description": "Лекарства"
+    },
+    {
+      "id": 9,
+      "type": "outcome",
+      "amount": 1355,
+      "category": 4,
+      "date": "2021-10-29T14:08:35.152Z",
+      "description": "Массаж"
+    },
+    {
+      "category": "Healthy",
+      "type": "outcome",
+      "amount": "5000",
+      "description": "spa",
+      "date": "2021-11-01T11:50:35.629Z",
+      "id": 10
+    },
+    {
+      "category": "Products",
+      "type": "outcome",
+      "amount": "1500",
+      "description": "burger",
+      "date": "2021-11-01T11:52:45.363Z",
+      "id": 11
+    },
+    {
+      "category": "Cats",
+      "type": "outcome",
+      "amount": "200",
+      "description": "Cats eat",
+      "date": "2021-11-02T11:12:43.787Z",
+      "id": 12
+    }
+  ],
+  "currency": {
+    "base": "base",
+    "date": "01.11.2021 12:01",
+    "rates": {
+      "UAH": 30.44,
+      "EUR": 1,
+      "USD": 1.16,
+      "BYN": 2.82
+    },
+    "success": true,
+    "timestamp": 1
+  }
+}

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "startProd": "ng serve --configuration=production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "watchProd": "ng build --watch --configuration production",
@@ -11,7 +12,7 @@
     "server": "json-server --watch db.json --port 3000",
     "serverProd": "json-server --watch db3030.json --port 3030",
     "dev": "concurrently --kill-others \"npm run start\" \"npm run server\"",
-    "prod": "concurrently --kill-others \"npm run start\" \"npm run serverProd\""
+    "prod": "concurrently --kill-others \"npm run startProd\" \"npm run serverProd\""
   },
   "private": true,
   "dependencies": {
