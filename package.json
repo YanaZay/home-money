@@ -7,7 +7,7 @@
     "startProd": "ng serve --configuration=production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "watchProd": "ng build --watch --configuration production",
+    "watchProd": "ng build --watch --configuration=production",
     "test": "ng test",
     "server": "json-server --watch db.json --port 3000",
     "serverProd": "json-server --watch db3030.json --port 3030",
