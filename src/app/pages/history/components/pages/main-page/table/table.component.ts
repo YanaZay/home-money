@@ -4,7 +4,7 @@ import { HistoryService } from '../../../../history.service';
 import { ICategories } from '../../../../../../shared/models/categories.interface';
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from '@angular/material/paginator';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AddEventComponent } from '../../../../../record/modal/add-event/add-event.component';
@@ -34,24 +34,20 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   public getData(): void {
-    let currentValue: IEvents[] = [];
-    this.historyService.getEvents()
+    forkJoin([
+      this.historyService.getEvents(),
+      this.historyService.getCategories()
+    ])
       .pipe(takeUntil(this.destroy$))
-      .subscribe((events:IEvents[]) => {
+      .subscribe(([events, categories]: [IEvents[], ICategories[]]) => {
         this.eventArray = events;
-        currentValue = events;
+        this.categoryArray = categories;
 
         this.dataSource = new MatTableDataSource(events);
         this.dataSource.paginator = this.paginator;
-      }
-    );
 
-    this.historyService.getCategories()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((categories:ICategories[]) => {
-        this.categoryArray = categories;
         for (let category of categories) {
-          for (let event of currentValue) {
+          for (let event of events) {
             category.id === event.category ? event.category = category.name : null;
           }
         }
