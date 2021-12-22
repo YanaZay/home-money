@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { AuthService } from '../auth.service';
-import { IUser } from '../../../shared/models/user.interface';
+import { IUserResponse } from '../../../shared/models/userResponse.interface';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public done: boolean = false;
   public hide: boolean = true;
-  private receivedUser: IUser | undefined;
+  private receivedUser: IUserResponse | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       delete newUser.check;
       this.authService.addUser(newUser)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((data:IUser) => {
+        .subscribe((data:IUserResponse) => {
         this.receivedUser = data;
         this.done = true;
         this.router.navigate(['/login'], {queryParams: {done: true}});

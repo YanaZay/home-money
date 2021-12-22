@@ -5,6 +5,18 @@
       "email": "yana@mail.com",
       "password": "12345678aA",
       "name": "Администратор"
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "YqVqb9zkizDn6AZ",
+      "user": "yanakipot",
+      "id": 2
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "YqVqb9zkizDn6AZ",
+      "user": "yanakipot",
+      "id": 3
     }
   ],
   "bill": {

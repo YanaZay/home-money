@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../../models/user.interface';
+import { IUserResponse } from '../../../models/userResponse.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +7,7 @@ import { IUser } from '../../../models/user.interface';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  public user!: IUser;
+  public user!: IUserResponse;
 
   public ngOnInit(): void {
     this.user = JSON.parse(<string>localStorage.getItem('user'));

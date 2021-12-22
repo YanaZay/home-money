@@ -1,10 +1,12 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { IUser } from '../../../shared/models/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import {delay, takeUntil} from 'rxjs/operators';
+
+import { delay, takeUntil } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
+
+import { AuthService } from '../auth.service';
+import { IUserResponse } from '../../../shared/models/userResponse.interface';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public done: boolean = false;
   public hide: boolean = true;
   public errorMessage: string = '';
-  private receivedUser: IUser | undefined;
+  private receivedUser: IUserResponse | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       const email = this.form.value.email;
       this.authService.checkUser(email)
         .pipe(takeUntil(this.destroy$))
-        .subscribe( (data:IUser[]) => {
+        .subscribe( (data:IUserResponse[]) => {
         this.receivedUser = data[0];
         if (this.receivedUser === undefined || this.receivedUser === null) {
           this.delayError('No such user was found.')

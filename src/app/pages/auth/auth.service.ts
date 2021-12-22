@@ -4,8 +4,9 @@ import { Router } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
-import { IUser } from '../../shared/models/user.interface';
 import { environment } from '../../../environments/environment';
+import { IUserRequest } from "../../shared/models/userRequest.interface";
+import { IUserResponse } from "../../shared/models/userResponse.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class AuthService {
     private router: Router
   ) {}
 
-  public addUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${ environment.apiHost }/users`, user);
+  public addUser(user: IUserResponse): Observable<IUserRequest> {
+    return this.http.post<IUserRequest>(`${ environment.apiHost }/users`, user);
   }
 
-  public checkUser(email: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${ environment.apiHost }/users?email=${ email }`);
+  public checkUser(email: string): Observable<IUserResponse[]> {
+    return this.http.get<IUserResponse[]>(`${ environment.apiHost }/users?email=${ email }`);
   }
 
   public login(): void {
