@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 import { AuthService } from '../auth.service';
 import { IUser } from '../../../shared/models/user.interface';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration',

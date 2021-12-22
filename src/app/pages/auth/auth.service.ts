@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
+
+import { Observable } from 'rxjs';
+
 import { IUser } from '../../shared/models/user.interface';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
-import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +17,11 @@ export class AuthService {
   ) {}
 
   public addUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.apiHost}/users`, user);
+    return this.http.post<IUser>(`${ environment.apiHost }/users`, user);
   }
 
   public checkUser(email: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${environment.apiHost}/users?email=${email}`);
+    return this.http.get<IUser[]>(`${ environment.apiHost }/users?email=${ email }`);
   }
 
   public login(): void {
