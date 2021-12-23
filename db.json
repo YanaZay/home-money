@@ -17,6 +17,24 @@
       "password": "YqVqb9zkizDn6AZ",
       "user": "yanakipot",
       "id": 3
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "Qq1111111111111",
+      "user": "yanakipot",
+      "id": 4
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "Qq111111111111111",
+      "user": "user",
+      "id": 5
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "Qq1111111111",
+      "user": "Cats",
+      "id": 6
     }
   ],
   "bill": {

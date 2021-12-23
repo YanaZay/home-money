@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 import { IUserResponse } from '../../../shared/models/userResponse.interface';
+import {Store} from "@ngrx/store";
+import {registerAction} from "../store/actions/register.action";
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +24,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   public ngOnInit(): void {
@@ -52,6 +55,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.done = true;
         this.router.navigate(['/login'], {queryParams: {done: true}});
       }, error => console.log(error));
+
+
+      this.store.dispatch(registerAction(newUser));
     }
   }
 

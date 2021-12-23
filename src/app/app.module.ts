@@ -11,6 +11,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApiInterceptor } from './shared/interceptor/api.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../environments/environment";
 
 
 @NgModule({
@@ -27,7 +30,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FlexLayoutModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [
     {
