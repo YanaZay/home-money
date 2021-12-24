@@ -17,6 +17,12 @@ export class AuthService {
     private router: Router
   ) {}
 
+
+  public register(data: IUserRequest): Observable<IUserResponse> {
+    return this.http.post<IUserResponse>(`${ environment.apiHost }/users`, data);
+  }
+
+
   public addUser(user: IUserResponse): Observable<IUserRequest> {
     return this.http.post<IUserRequest>(`${ environment.apiHost }/users`, user);
   }
