@@ -3,12 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+
+import { select, Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
 import { IUserResponse } from '../../../shared/models/userResponse.interface';
-import {Store} from "@ngrx/store";
-import {registerAction} from "../store/actions/register.action";
+import { registerAction } from '../store/actions/register.action';
+import { isSubmittingSelector } from '../store/selectors';
 
 @Component({
   selector: 'app-registration',
@@ -17,8 +19,9 @@ import {registerAction} from "../store/actions/register.action";
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
-  public done: boolean = false;
+  // public done: boolean = false;
   public hide: boolean = true;
+  public isSubmitting$!: Observable<boolean>;
   private receivedUser: IUserResponse | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -30,6 +33,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.buildForm();
+    this.initializeValues();
   }
 
   public buildForm(): void {
@@ -51,18 +55,32 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.authService.addUser(newUser)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data:IUserResponse) => {
-        this.receivedUser = data;
-        this.done = true;
-        this.router.navigate(['/login'], {queryParams: {done: true}});
-      }, error => console.log(error));
-
+          this.receivedUser = data;
+          // this.done = true;
+          this.router.navigate(['/login'], {queryParams: {done: true}});
+        }, error => console.log(error));
 
       this.store.dispatch(registerAction(newUser));
+      this.authService.register(newUser)
+        .subscribe((user: IUserResponse) => {
+          console.log(user)
+        });
     }
+  }
+
+  public isDisabled() {
+    return !!(this.form.valid && this.isSubmitting$);
   }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private initializeValues() {
+    this.isSubmitting$ = this.store
+      .pipe(
+        select(isSubmittingSelector)
+      )
   }
 }
