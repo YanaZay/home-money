@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -11,7 +12,8 @@ import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { MaterialModule } from '../../shared/material.module';
 import { AuthService } from './auth.service';
-import { authReducer } from "./store/reducers";
+import { authReducer } from './store/reducers';
+import { RegisterEffect } from './store/effects/register.effect';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { authReducer } from "./store/reducers";
     MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('auth', authReducer)
+    StoreModule.forFeature('auth', authReducer),
+    EffectsModule.forFeature([RegisterEffect])
   ],
   providers: [
     AuthService
