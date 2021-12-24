@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { IUserRequest } from '../../shared/models/userRequest.interface';
+import { IRegisterRequest } from '../../shared/models/registerRequest.interface';
 import { ICurrentUser } from '../../shared/models/currentUser.interface';
+import { ILoginRequest } from '../../shared/models/loginRequest.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,14 @@ import { ICurrentUser } from '../../shared/models/currentUser.interface';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  public register(data: IUserRequest): Observable<ICurrentUser> {
+  public register(data: IRegisterRequest): Observable<ICurrentUser> {
     return this.http.post<ICurrentUser>(`${environment.apiHost}/users`, data);
+  }
+
+  public login(data: ILoginRequest): Observable<ICurrentUser[]> {
+    return this.http.get<ICurrentUser[]>(
+      `${environment.apiHost}/users?email=${data.email}`
+    );
   }
 
   public checkUser(email: string): Observable<ICurrentUser[]> {
@@ -24,7 +31,7 @@ export class AuthService {
     );
   }
 
-  public login(): void {
+  public logout(): void {
     localStorage.clear();
     this.router.navigate(['/login']);
   }

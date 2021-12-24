@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .checkUser(email)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: ICurrentUser[]) => {
+          console.log(data);
           this.receivedUser = data[0];
           if (this.receivedUser === undefined || this.receivedUser === null) {
             this.delayError('No such user was found.');

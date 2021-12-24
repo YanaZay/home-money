@@ -14,13 +14,10 @@ import { MaterialModule } from '../../shared/material.module';
 import { AuthService } from './auth.service';
 import { authReducer } from './store/reducers';
 import { RegisterEffect } from './store/effects/register.effect';
+import { LoginEffect } from './store/effects/login.effect';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegistrationComponent,
-    AuthComponent
-  ],
+  declarations: [LoginComponent, RegistrationComponent, AuthComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -28,10 +25,8 @@ import { RegisterEffect } from './store/effects/register.effect';
     FlexLayoutModule,
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authReducer),
-    EffectsModule.forFeature([RegisterEffect])
+    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
   ],
-  providers: [
-    AuthService
-  ]
+  providers: [AuthService],
 })
 export class AuthModule {}
