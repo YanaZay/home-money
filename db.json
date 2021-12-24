@@ -20,6 +20,18 @@
       "password": "Qqq111111111111",
       "user": "yanakipot",
       "id": 4
+    },
+    {
+      "email": "yanakipot@gmail.com",
+      "password": "Qqq1111111111",
+      "user": "Travel",
+      "id": 5
+    },
+    {
+      "email": "qwerty@com",
+      "password": "Qqqqqqqqqqa1",
+      "user": "5,10,25,100",
+      "id": 6
     }
   ],
   "bill": {
