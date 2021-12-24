@@ -11,7 +11,8 @@ import {
   registerSuccessAction,
 } from '../actions/register.action';
 import { AuthService } from '../../auth.service';
-import { IUserResponse } from '../../../../shared/models/userResponse.interface';
+import { ICurrentUser } from '../../../../shared/models/currentUser.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class RegisterEffect {
@@ -20,11 +21,13 @@ export class RegisterEffect {
       ofType(registerAction),
       switchMap(({ request }) => {
         return this.AuthService.register(request).pipe(
-          map((currentUser: IUserResponse) => {
+          map((currentUser: ICurrentUser) => {
             return registerSuccessAction({ currentUser });
           }),
-          catchError(() => {
-            return of(registerFailureAction);
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              registerFailureAction({ errors: errorResponse.error.errors })
+            );
           })
         );
       })

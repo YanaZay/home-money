@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { IUserRequest } from '../../shared/models/userRequest.interface';
-import { IUserResponse } from '../../shared/models/userResponse.interface';
+import { ICurrentUser } from '../../shared/models/currentUser.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +14,12 @@ import { IUserResponse } from '../../shared/models/userResponse.interface';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  public register(data: IUserRequest): Observable<IUserResponse> {
-    return this.http.post<IUserResponse>(`${environment.apiHost}/users`, data);
+  public register(data: IUserRequest): Observable<ICurrentUser> {
+    return this.http.post<ICurrentUser>(`${environment.apiHost}/users`, data);
   }
 
-  public checkUser(email: string): Observable<IUserResponse[]> {
-    return this.http.get<IUserResponse[]>(
+  public checkUser(email: string): Observable<ICurrentUser[]> {
+    return this.http.get<ICurrentUser[]>(
       `${environment.apiHost}/users?email=${email}`
     );
   }
