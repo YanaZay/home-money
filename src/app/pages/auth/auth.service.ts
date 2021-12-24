@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { IUserRequest } from "../../shared/models/userRequest.interface";
-import { IUserResponse } from "../../shared/models/userResponse.interface";
+import { IUserRequest } from '../../shared/models/userRequest.interface';
+import { IUserResponse } from '../../shared/models/userResponse.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
-
+  constructor(private http: HttpClient, private router: Router) {}
 
   public register(data: IUserRequest): Observable<IUserResponse> {
-    return this.http.post<IUserResponse>(`${ environment.apiHost }/users`, data);
-  }
-
-
-  public addUser(user: IUserResponse): Observable<IUserRequest> {
-    return this.http.post<IUserRequest>(`${ environment.apiHost }/users`, user);
+    return this.http.post<IUserResponse>(`${environment.apiHost}/users`, data);
   }
 
   public checkUser(email: string): Observable<IUserResponse[]> {
-    return this.http.get<IUserResponse[]>(`${ environment.apiHost }/users?email=${ email }`);
+    return this.http.get<IUserResponse[]>(
+      `${environment.apiHost}/users?email=${email}`
+    );
   }
 
   public login(): void {
