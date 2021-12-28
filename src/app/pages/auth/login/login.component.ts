@@ -11,8 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { delay, takeUntil } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 
+import { Store } from '@ngrx/store';
+
 import { AuthService } from '../auth.service';
 import { ICurrentUser } from '../../../shared/models/currentUser.interface';
+import { loginAction } from '../store/actions/login.action';
+import { ILoginRequest } from '../../../shared/models/loginRequest.interface';
 
 @Component({
   selector: 'app-login',
@@ -25,13 +29,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   public done: boolean = false;
   public hide: boolean = true;
   public errorMessage: string = '';
-  private receivedUser: ICurrentUser | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) {}
 
   public ngOnInit(): void {
@@ -60,26 +64,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public login(): void {
     if (this.form.valid) {
-      const email = this.form.value.email;
-      this.authService
-        .checkUser(email)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data: ICurrentUser[]) => {
-          console.log(data);
-          this.receivedUser = data[0];
-          if (this.receivedUser === undefined || this.receivedUser === null) {
-            this.delayError('No such user was found.');
-            return;
-          }
-          if (this.form.value.password !== this.receivedUser.password) {
-            this.delayError('Wrong password.');
-            return;
-          }
-          if (this.form.value.password === this.receivedUser.password) {
-            localStorage.setItem('user', JSON.stringify(this.receivedUser));
-            this.router.navigate(['/page']);
-          }
-        });
+      const request: ILoginRequest = {
+        email: this.form.value.email,
+      };
+      this.store.dispatch(loginAction({ request }));
     }
   }
 

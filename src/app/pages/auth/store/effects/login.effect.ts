@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { AuthService } from '../../auth.service';
@@ -24,6 +24,7 @@ export class LoginEffect {
         return this.AuthService.login(request).pipe(
           map((currentUserArray: ICurrentUser[]) => {
             const currentUser = currentUserArray[0];
+            localStorage.setItem('user', JSON.stringify(currentUser));
             return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
@@ -36,17 +37,17 @@ export class LoginEffect {
     )
   );
 
-  // private redirectAfterSubmit$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(loginSuccessAction),
-  //       tap(() => {
-  //         this.router.navigate(['/page']);
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-  // //если используем tap, и не возвращаем action - { dispatch: false }, чтобы не было memory leak
+  private redirectAfterSubmit$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loginSuccessAction),
+        tap(() => {
+          this.router.navigate(['/page']);
+        })
+      ),
+    { dispatch: false }
+  );
+  //если используем tap, и не возвращаем action - { dispatch: false }, чтобы не было memory leak
 
   constructor(
     private actions$: Actions,
