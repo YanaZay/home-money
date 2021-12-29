@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public hide: boolean = true;
   public errorMessage: string = '';
   private destroy$: Subject<void> = new Subject<void>();
+  private currentUser!: ICurrentUser;
 
   constructor(
     private authService: AuthService,
@@ -67,7 +68,23 @@ export class LoginComponent implements OnInit, OnDestroy {
       const request: ILoginRequest = {
         email: this.form.value.email,
       };
-      this.store.dispatch(loginAction({ request }));
+      this.authService
+        .checkUser(this.form.value.email)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: ICurrentUser[]) => {
+          this.currentUser = data[0];
+          if (this.currentUser === undefined || this.currentUser === null) {
+            this.delayError('No such user was found.');
+            return;
+          }
+          if (this.form.value.password !== this.currentUser.password) {
+            this.delayError('Wrong password.');
+            return;
+          }
+          if (this.form.value.password === this.currentUser.password) {
+            this.store.dispatch(loginAction({ request }));
+          }
+        });
     }
   }
 

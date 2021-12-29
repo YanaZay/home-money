@@ -24,7 +24,6 @@ export class AuthService {
       `${environment.apiHost}/users?email=${data.email}`
     );
   }
-
   public checkUser(email: string): Observable<ICurrentUser[]> {
     return this.http.get<ICurrentUser[]>(
       `${environment.apiHost}/users?email=${email}`
