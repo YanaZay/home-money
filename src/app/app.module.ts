@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ApiInterceptor } from './shared/interceptor/api.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -27,7 +33,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FlexLayoutModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [
     {

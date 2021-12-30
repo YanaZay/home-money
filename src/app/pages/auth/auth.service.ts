@@ -1,28 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IUser } from '../../shared/models/user.interface';
-import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
-import { Router } from "@angular/router";
+
+import { environment } from '../../../environments/environment';
+import { IRegisterRequest } from '../../shared/models/registerRequest.interface';
+import { ICurrentUser } from '../../shared/models/currentUser.interface';
+import { ILoginRequest } from '../../shared/models/loginRequest.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  public addUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.apiHost}/users`, user);
+  public register(data: IRegisterRequest): Observable<ICurrentUser> {
+    return this.http.post<ICurrentUser>(`${environment.apiHost}/users`, data);
   }
 
-  public checkUser(email: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${environment.apiHost}/users?email=${email}`);
+  public login(data: ILoginRequest): Observable<ICurrentUser[]> {
+    return this.http.get<ICurrentUser[]>(
+      `${environment.apiHost}/users?email=${data.email}`
+    );
+  }
+  public checkUser(email: string): Observable<ICurrentUser[]> {
+    return this.http.get<ICurrentUser[]>(
+      `${environment.apiHost}/users?email=${email}`
+    );
   }
 
-  public login(): void {
+  public logout(): void {
     localStorage.clear();
     this.router.navigate(['/login']);
   }

@@ -1,30 +1,34 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { IUser } from '../../../shared/models/user.interface';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+
+import { Observable } from 'rxjs';
+
+import { select, Store } from '@ngrx/store';
+
+import { AuthService } from '../auth.service';
+import { registerAction } from '../store/actions/register.action';
+import { isSubmittingSelector } from '../store/selectors';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class RegistrationComponent implements OnInit {
   public form!: FormGroup;
-  public done: boolean = false;
   public hide: boolean = true;
-  private receivedUser: IUser | undefined;
-  private destroy$: Subject<void> = new Subject<void>();
+  public isSubmitting$!: Observable<boolean>;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   public ngOnInit(): void {
     this.buildForm();
+    this.initializeValues();
   }
 
   public buildForm(): void {
@@ -33,28 +37,26 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+      ]),
       user: new FormControl('', [Validators.required]),
-      check: new FormControl (false, [Validators.requiredTrue])
+      check: new FormControl(false, [Validators.requiredTrue]),
     });
   }
 
   public registration(): void {
     if (this.form.valid) {
-      const newUser = {...this.form.value};
-      delete newUser.check;
-      this.authService.addUser(newUser)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data:IUser) => {
-        this.receivedUser = data;
-        this.done = true;
-        this.router.navigate(['/login'], {queryParams: {done: true}});
-      }, error => console.log(error));
+      const request = { ...this.form.value };
+      delete request.check;
+      this.store.dispatch(registerAction({ request }));
     }
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  public isDisabled() {
+    return !!(this.form.valid && this.isSubmitting$);
+  }
+
+  private initializeValues() {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 }
