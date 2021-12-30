@@ -11,6 +11,12 @@
       "password": "qQ11111111111111",
       "user": "user",
       "id": 2
+    },
+    {
+      "email": "qwerty@com",
+      "password": "Qwerty123445",
+      "user": "qwert1",
+      "id": 3
     }
   ],
   "bill": {
