@@ -1,10 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import { IBill } from '../../../../shared/models/bill.interface';
+import { ICurrentBalance } from '../../../../shared/models/currentBalanceinterface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IExchangeInterface } from '../../../../shared/models/exchange.interface';
+import { Store } from '@ngrx/store';
+import { getBalanceAction } from '../../store/actions/balance.action';
 
 @Component({
   selector: 'app-balance',
@@ -16,7 +18,7 @@ export class BalanceComponent implements OnInit, OnDestroy {
   public bill!: number;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
 
   public ngOnInit(): void {
     this.initializeValue();
@@ -27,12 +29,13 @@ export class BalanceComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private initializeValue() {
-    this.http
-      .get<IBill>(`${environment.apiHost}/bill`)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: IBill) => {
-        this.bill = data.value;
-      });
+  private initializeValue(): void {
+    this.store.dispatch(getBalanceAction());
+    // this.http
+    //   .get<IBill>(`${environment.apiHost}/bill`)
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((data: IBill) => {
+    //     this.bill = data.value;
+    //   });
   }
 }
