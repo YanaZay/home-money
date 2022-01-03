@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
 import { ICurrentUser } from '../../../models/currentUser.interface';
+import {
+  currentUserSelector,
+  isLoggedInSelector,
+} from '../../../../pages/auth/store/selectors';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +16,17 @@ import { ICurrentUser } from '../../../models/currentUser.interface';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  public user!: ICurrentUser;
+  public currentUser$!: Observable<ICurrentUser | null>;
+  public isLoggedIn$!: Observable<boolean | null>;
+
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
-    this.user = JSON.parse(<string>localStorage.getItem('user'));
+    this.initializeValue();
+  }
+
+  private initializeValue(): void {
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
+    this.currentUser$ = this.store.pipe(select(currentUserSelector));
   }
 }

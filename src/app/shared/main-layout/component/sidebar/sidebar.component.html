@@ -1,15 +1,18 @@
-<mat-card class="sidebar-header">
-  <mat-card-title>Administrator</mat-card-title>
-  <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-  <img style="border-radius: 50%" mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-</mat-card>
-<mat-card class="sidebar-list">
-  <mat-card-subtitle>Pages</mat-card-subtitle>
-  <mat-list role="listitem">
-    <mat-list-item role="listitem" routerLinkActive="active" [routerLink]="['/page/bill']"><a>Billing page</a></mat-list-item>
-    <mat-list-item role="listitem" routerLinkActive="active" [routerLink]="['/page/history']"><a>History Page</a></mat-list-item>
-    <mat-list-item role="listitem" routerLinkActive="active" [routerLink]="['/page/record']"><a>Record Page</a></mat-list-item>
-  </mat-list>
-</mat-card>
+<ng-container *ngIf="currentUser$ | async">
+  <mat-card class="sidebar-header">
+    <mat-card-title>Administrator</mat-card-title>
+    <mat-card-subtitle>{{ (currentUser$ | async)?.email }}</mat-card-subtitle>
+    <img style="border-radius: 50%" mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  </mat-card>
+  <mat-card class="sidebar-list">
+    <mat-card-subtitle>Pages</mat-card-subtitle>
+    <mat-list role="listitem">
+      <mat-list-item role="listitem" routerLinkActive="active" [routerLink]="['/page/bill']"><a>Billing page</a></mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" [routerLink]="['/page/history']"><a>History Page</a></mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" [routerLink]="['/page/record']"><a>Record Page</a></mat-list-item>
+    </mat-list>
+  </mat-card>
+</ng-container>
+
 
 
