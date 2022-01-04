@@ -1,24 +1,28 @@
-<mat-card>
-  <mat-card-subtitle><h2>Bill</h2></mat-card-subtitle>
-  <mat-list >
+<ng-container *ngIf="currentBalance$ | async">
+  <mat-card>
+    <mat-card-subtitle><h2>Bill</h2></mat-card-subtitle>
+    <mat-list >
 
-    <mat-list-item>
-      <mat-icon><img src="https://img.icons8.com/material-rounded/26/000000/euro-pound-exchange.png" alt="#"/></mat-icon>
-      <span>{{bill | currency:'':''}}</span>
-    </mat-list-item>
-    <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon><img src="https://img.icons8.com/material-rounded/26/000000/euro-pound-exchange.png" alt="#"/></mat-icon>
+        <span>{{ (currentBalance$ | async)!.value | currency:'':'' }}</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
 
-    <mat-list-item>
-      <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/ukrainian-hryvnia.png" alt="#"/></mat-icon>
-      <span>{{dataRates?.rates['UAH'] * bill | currency:'':''}}</span>
-    </mat-list-item>
-    <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/ukrainian-hryvnia.png" alt="#"/></mat-icon>
+        <span>{{dataRates?.rates['UAH'] * (this.currentBalance$ | async)!.value | currency:'':''}}</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
 
-    <mat-list-item>
-      <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/us-dollar.png" alt="#"/></mat-icon>
-      <span>{{dataRates?.rates['USD'] * bill | currency:'':''}}</span>
-    </mat-list-item>
-    <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon><img src="https://img.icons8.com/material-rounded/24/000000/us-dollar.png" alt="#"/></mat-icon>
+        <span>{{dataRates?.rates['USD'] * (this.currentBalance$ | async)!.value | currency:'':''}}</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
 
-  </mat-list>
-</mat-card>
+    </mat-list>
+  </mat-card>
+</ng-container>
+
+

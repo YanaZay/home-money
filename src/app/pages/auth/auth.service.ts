@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { IRegisterRequest } from '../../shared/models/register-request.interface';
@@ -24,6 +24,11 @@ export class AuthService {
       `${environment.apiHost}/users?email=${data.email}`
     );
   }
+
+  public getCurrentUser(): Observable<ICurrentUser> {
+    return of(JSON.parse(JSON.parse(<string>localStorage.getItem('user'))));
+  }
+
   public checkUser(email: string): Observable<ICurrentUser[]> {
     return this.http.get<ICurrentUser[]>(
       `${environment.apiHost}/users?email=${email}`

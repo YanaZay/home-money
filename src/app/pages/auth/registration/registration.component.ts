@@ -46,17 +46,17 @@ export class RegistrationComponent implements OnInit {
 
   public registration(): void {
     if (this.form.valid) {
+      delete this.form.value.check;
       const request = { ...this.form.value };
-      delete request.check;
       this.store.dispatch(registerAction({ request }));
     }
   }
 
-  public isDisabled() {
+  public isDisabled(): boolean {
     return !!(this.form.valid && this.isSubmitting$);
   }
 
-  private initializeValues() {
+  private initializeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 }

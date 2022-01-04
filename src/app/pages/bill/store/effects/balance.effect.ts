@@ -16,7 +16,8 @@ export class BalanceEffect {
       switchMap(() => {
         return this.billService.getBalance().pipe(
           map((currentBalance: ICurrentBalance) => {
-            return currentBalanceAction({ currentBalance });
+            console.log(currentBalance);
+            return currentBalanceAction({ currentBalance: currentBalance });
           })
         );
       })

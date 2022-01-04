@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 import { authReducer } from './store/reducers';
 import { RegisterEffect } from './store/effects/register.effect';
 import { LoginEffect } from './store/effects/login.effect';
+import { GetCurrentUserEffect } from './store/effects/get-current-user.effect';
 
 @NgModule({
   declarations: [LoginComponent, RegistrationComponent, AuthComponent],
@@ -25,7 +26,11 @@ import { LoginEffect } from './store/effects/login.effect';
     FlexLayoutModule,
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authReducer),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([
+      RegisterEffect,
+      LoginEffect,
+      GetCurrentUserEffect,
+    ]),
   ],
   providers: [AuthService],
 })

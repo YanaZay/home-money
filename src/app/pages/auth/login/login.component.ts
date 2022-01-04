@@ -41,26 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.buildForm();
-  }
-
-  public buildForm(): void {
-    this.form = new FormGroup({
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-    });
-    this.route.queryParams
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((params) => {
-        this.done = !!params.done;
-      });
-    of(this.done)
-      .pipe(delay(3000))
-      .subscribe(() => {
-        this.done = false;
-      });
+    this.successfully();
   }
 
   public login(): void {
@@ -101,4 +82,28 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  private buildForm(): void {
+    this.form = new FormGroup({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
+  }
+
+  private successfully() {
+    this.route.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params) => {
+        this.done = !!params.done;
+      });
+    of(this.done)
+      .pipe(delay(3000))
+      .subscribe(() => {
+        this.done = false;
+      });
+  }
+  //TODO rewrite subscription
 }

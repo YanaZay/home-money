@@ -1,4 +1,4 @@
-<ng-container *ngIf="currentUser$ | async">
+<ng-container>
   <mat-card class="sidebar-header">
     <mat-card-title>Administrator</mat-card-title>
     <mat-card-subtitle>{{ (currentUser$ | async)?.email }}</mat-card-subtitle>

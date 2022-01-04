@@ -1,6 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { getBalanceAction } from './actions/balance.action';
+import {
+  currentBalanceAction,
+  getBalanceAction,
+} from './actions/balance.action';
 import { IBillState } from '../types/bill-state.interface';
 
 const initialState: IBillState = {
@@ -9,8 +12,18 @@ const initialState: IBillState = {
 
 export const billReducer = createReducer(
   initialState,
-  on(getBalanceAction, (state): any => ({
-    ...state,
-    currentBalance: state.currentBalance,
-  }))
+  on(
+    getBalanceAction,
+    (state): IBillState => ({
+      ...state,
+      currentBalance: null,
+    })
+  ),
+  on(
+    currentBalanceAction,
+    (state, action): IBillState => ({
+      ...state,
+      currentBalance: action.currentBalance,
+    })
+  )
 );
