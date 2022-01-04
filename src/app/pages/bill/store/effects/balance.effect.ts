@@ -6,7 +6,7 @@ import {
 } from '../actions/balance.action';
 import { map, switchMap } from 'rxjs/operators';
 import { BillService } from '../../bill.service';
-import { ICurrentBalance } from '../../../../shared/models/currentBalanceinterface';
+import { ICurrentBalance } from '../../../../shared/models/current-balance.interface';
 
 @Injectable()
 export class BalanceEffect {

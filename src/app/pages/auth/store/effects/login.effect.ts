@@ -8,7 +8,7 @@ import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { AuthService } from '../../auth.service';
-import { ICurrentUser } from '../../../../shared/models/currentUser.interface';
+import { ICurrentUser } from '../../../../shared/models/current-user.interface';
 import {
   loginAction,
   loginFailureAction,

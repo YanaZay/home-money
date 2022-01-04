@@ -14,9 +14,9 @@ import { of, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
-import { ICurrentUser } from '../../../shared/models/currentUser.interface';
+import { ICurrentUser } from '../../../shared/models/current-user.interface';
 import { loginAction } from '../store/actions/login.action';
-import { ILoginRequest } from '../../../shared/models/loginRequest.interface';
+import { ILoginRequest } from '../../../shared/models/login-request.interface';
 
 @Component({
   selector: 'app-login',

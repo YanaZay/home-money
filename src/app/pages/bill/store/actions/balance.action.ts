@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ICurrentBalance } from '../../../../shared/models/currentBalanceinterface';
+import { ICurrentBalance } from '../../../../shared/models/current-balance.interface';
 
 export const getBalanceAction = createAction('[Bill] Bill get balance');
 

@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { IRegisterRequest } from '../../shared/models/registerRequest.interface';
-import { ICurrentUser } from '../../shared/models/currentUser.interface';
-import { ILoginRequest } from '../../shared/models/loginRequest.interface';
+import { IRegisterRequest } from '../../shared/models/register-request.interface';
+import { ICurrentUser } from '../../shared/models/current-user.interface';
+import { ILoginRequest } from '../../shared/models/login-request.interface';
 
 @Injectable({
   providedIn: 'root',

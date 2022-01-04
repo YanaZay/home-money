@@ -1,9 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
-import { ICurrentBalance } from '../../../../shared/models/currentBalanceinterface';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { IExchangeInterface } from '../../../../shared/models/exchange.interface';
 import { Store } from '@ngrx/store';
 import { getBalanceAction } from '../../store/actions/balance.action';

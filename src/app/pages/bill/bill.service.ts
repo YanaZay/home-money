@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { IExchangeInterface } from '../../shared/models/exchange.interface';
-import { ICurrentBalance } from '../../shared/models/currentBalanceinterface';
+import { ICurrentBalance } from '../../shared/models/current-balance.interface';
 
 @Injectable({
   providedIn: 'root',

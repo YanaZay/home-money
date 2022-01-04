@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { getBalanceAction } from './actions/balance.action';
-import any = jasmine.any;
+import { IBillState } from '../types/bill-state.interface';
 
-const initialState: { currentBalance: any } = {
+const initialState: IBillState = {
   currentBalance: null,
 };
 
