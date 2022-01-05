@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { ICurrentUser } from '../../../models/current-user.interface';
+import { ICurrentUser } from '../../../types/current-user.interface';
 import {
   currentUserSelector,
   isLoggedInSelector,

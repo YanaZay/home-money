@@ -1,9 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 
-import { IRegisterRequest } from '../../../../shared/models/register-request.interface';
-import { ICurrentUser } from '../../../../shared/models/current-user.interface';
-import { IBackendErrors } from '../../../../shared/models/backend-errors.interface';
-
+import { IRegisterRequest } from '../../../../shared/types/register-request.interface';
+import { ICurrentUser } from '../../../../shared/types/current-user.interface';
+import { IBackendErrors } from '../../../../shared/types/backend-errors.interface';
 
 export const registerAction = createAction(
   '[Auth] Register',

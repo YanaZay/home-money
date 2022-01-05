@@ -1,13 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  currentBalanceAction,
+  getBalanceSuccessAction,
   getBalanceAction,
+  getBalanceFailureAction,
 } from './actions/balance.action';
 import { IBillState } from '../types/bill-state.interface';
 
 const initialState: IBillState = {
   currentBalance: null,
+  isLoading: false,
+  error: null,
 };
 
 export const billReducer = createReducer(
@@ -16,14 +19,22 @@ export const billReducer = createReducer(
     getBalanceAction,
     (state): IBillState => ({
       ...state,
-      currentBalance: null,
+      isLoading: true,
     })
   ),
   on(
-    currentBalanceAction,
+    getBalanceSuccessAction,
     (state, action): IBillState => ({
       ...state,
+      isLoading: false,
       currentBalance: action.currentBalance,
+    })
+  ),
+  on(
+    getBalanceFailureAction,
+    (state): IBillState => ({
+      ...state,
+      isLoading: false,
     })
   )
 );

@@ -1,14 +1,14 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { RecordService } from '../../record.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ICategories } from '../../../../shared/models/categories.interface';
+import { ICategories } from '../../../../shared/types/categories.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-delete-category',
   templateUrl: './delete-category.component.html',
-  styleUrls: ['./delete-category.component.scss']
+  styleUrls: ['./delete-category.component.scss'],
 })
 export class DeleteCategoryComponent implements OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
@@ -16,15 +16,16 @@ export class DeleteCategoryComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories,
     private recordService: RecordService,
-    private dialogRef: MatDialogRef<DeleteCategoryComponent>,
+    private dialogRef: MatDialogRef<DeleteCategoryComponent>
   ) {}
 
   public deleteCategory(): void {
-    this.recordService.deleteCategory(this.data.id)
+    this.recordService
+      .deleteCategory(this.data.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-      this.close(true);
-    });
+        this.close(true);
+      });
   }
 
   public close(isClosed: boolean): void {

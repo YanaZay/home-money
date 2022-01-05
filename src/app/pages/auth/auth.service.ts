@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 
-import { environment } from '../../../environments/environment';
-import { IRegisterRequest } from '../../shared/models/register-request.interface';
-import { ICurrentUser } from '../../shared/models/current-user.interface';
-import { ILoginRequest } from '../../shared/models/login-request.interface';
+import { IRegisterRequest } from '../../shared/types/register-request.interface';
+import { ICurrentUser } from '../../shared/types/current-user.interface';
+import { ILoginRequest } from '../../shared/types/login-request.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,23 +15,23 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   public register(data: IRegisterRequest): Observable<ICurrentUser> {
-    return this.http.post<ICurrentUser>(`${environment.apiHost}/users`, data);
+    return this.http.post<ICurrentUser>('/users', data);
   }
 
   public login(data: ILoginRequest): Observable<ICurrentUser[]> {
-    return this.http.get<ICurrentUser[]>(
-      `${environment.apiHost}/users?email=${data.email}`
-    );
+    return this.http.get<ICurrentUser[]>(`/users?email=${data.email}`);
   }
 
   public getCurrentUser(): Observable<ICurrentUser> {
-    return of(JSON.parse(JSON.parse(<string>localStorage.getItem('user'))));
+    const currentUser: ICurrentUser = JSON.parse(
+      <string>localStorage.getItem('user')
+    );
+    console.log(currentUser);
+    return of(currentUser);
   }
 
   public checkUser(email: string): Observable<ICurrentUser[]> {
-    return this.http.get<ICurrentUser[]>(
-      `${environment.apiHost}/users?email=${email}`
-    );
+    return this.http.get<ICurrentUser[]>(`/users?email=${email}`);
   }
 
   public logout(): void {

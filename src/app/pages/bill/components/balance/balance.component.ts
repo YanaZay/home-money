@@ -5,9 +5,9 @@ import { Observable, Subject } from 'rxjs';
 
 import { select, Store } from '@ngrx/store';
 
-import { IExchangeInterface } from '../../../../shared/models/exchange.interface';
+import { IExchangeInterface } from '../../../../shared/types/exchange.interface';
 import { getBalanceAction } from '../../store/actions/balance.action';
-import { ICurrentBalance } from '../../../../shared/models/current-balance.interface';
+import { ICurrentBalance } from '../../../../shared/types/current-balance.interface';
 import { currentBalanceSelector } from '../../store/selectors';
 
 @Component({

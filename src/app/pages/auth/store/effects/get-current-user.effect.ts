@@ -12,7 +12,7 @@ import {
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction,
 } from '../actions/get-current-user.action';
-import { ICurrentUser } from '../../../../shared/models/current-user.interface';
+import { ICurrentUser } from '../../../../shared/types/current-user.interface';
 
 @Injectable()
 export class GetCurrentUserEffect {
@@ -20,14 +20,8 @@ export class GetCurrentUserEffect {
     this.actions$.pipe(
       ofType(getCurrentUserAction),
       switchMap(() => {
-        // const token = JSON.parse(<string>localStorage.getItem('user'));
-        // console.log(token);
-        // if (!token) {
-        //   return of(getCurrentUserFailureAction);
-        // }
         return this.authService.getCurrentUser().pipe(
           map((currentUser: ICurrentUser) => {
-            console.log(currentUser);
             return getCurrentUserSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
