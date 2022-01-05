@@ -10,12 +10,6 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  //   const newUrl = {url: `${environment.apiHost}`};
-  //   request = Object.assign(request, newUrl);
-  //   return next.handle(request);
-  // }
-
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
