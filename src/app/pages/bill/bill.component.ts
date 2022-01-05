@@ -1,37 +1,37 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BillService } from './bill.service';
+import { Component, OnInit } from '@angular/core';
+
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
 import { IExchangeInterface } from '../../shared/types/exchange.interface';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { getExchangeRatesAction } from './store/actions/get-exchange-rates.action';
+import { getBalanceAction } from './store/actions/get-balance.action';
+import { exchangeRatesSelector, isLoadingSelector } from './store/selectors';
 
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.component.html',
   styleUrls: ['./bill.component.scss'],
 })
-export class BillComponent implements OnInit, OnDestroy {
-  public rates!: IExchangeInterface;
-  public loading: boolean = true;
-  private destroy$: Subject<void> = new Subject<void>();
+export class BillComponent implements OnInit {
+  public rates$!: Observable<IExchangeInterface | null>;
+  public isLoading$!: Observable<boolean>;
 
-  constructor(private billService: BillService) {}
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
-    this.getData();
+    this.initializeValues();
+    this.fetchData();
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  private initializeValues(): void {
+    this.rates$ = this.store.pipe(select(exchangeRatesSelector));
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
   }
 
-  public getData(): void {
-    this.billService
-      .getExchangeRates()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: IExchangeInterface) => {
-        this.rates = data;
-        this.loading = false;
-      });
+  public fetchData(): void {
+    this.store.dispatch(getBalanceAction());
+    this.store.dispatch(getExchangeRatesAction());
   }
 }

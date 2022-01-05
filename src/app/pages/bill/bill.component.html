@@ -1,18 +1,18 @@
 <div class="title">
   <h3 class="title left">Billing page</h3>
-  <button mat-icon-button (click)="getData()">
+  <button mat-icon-button (click)="fetchData()">
     <mat-icon>refresh</mat-icon>
   </button>
 </div>
 
 <div class="hr"></div>
 
-<div *ngIf="loading" class="loading"><h3>Loading...</h3></div>
-<div *ngIf="!loading" class="content">
+<div *ngIf="isLoading$ | async" class="loading"><h3>Loading...</h3></div>
+<div *ngIf="rates$ | async" class="content">
   <div class="component-1">
-    <app-balance *ngIf="rates" [dataRates]="rates"></app-balance>
+    <app-balance *ngIf="rates$ | async" [dataRates]="rates$ | async"></app-balance>
   </div>
   <div class="component-2">
-    <app-current *ngIf="rates" [dataRates]="rates"></app-current>
+    <app-current *ngIf="rates$ | async" [dataRates]="rates$ | async"></app-current>
   </div>
 </div>

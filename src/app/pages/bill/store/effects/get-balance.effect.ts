@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+
+import { map, switchMap } from 'rxjs/operators';
+
 import {
   getBalanceSuccessAction,
   getBalanceAction,
-} from '../actions/balance.action';
-import { map, switchMap } from 'rxjs/operators';
+} from '../actions/get-balance.action';
 import { BillService } from '../../bill.service';
 import { ICurrentBalance } from '../../../../shared/types/current-balance.interface';
 
 @Injectable()
-export class BalanceEffect {
-  public balance$ = createEffect(() =>
+export class GetBalanceEffect {
+  public getBalance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getBalanceAction),
       switchMap(() => {

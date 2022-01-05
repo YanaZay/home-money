@@ -1,39 +1,28 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { select, Store } from '@ngrx/store';
 
 import { IExchangeInterface } from '../../../../shared/types/exchange.interface';
-import { getBalanceAction } from '../../store/actions/balance.action';
 import { ICurrentBalance } from '../../../../shared/types/current-balance.interface';
 import { currentBalanceSelector } from '../../store/selectors';
-
 @Component({
   selector: 'app-balance',
   templateUrl: './balance.component.html',
   styleUrls: ['./balance.component.scss'],
 })
-export class BalanceComponent implements OnInit, OnDestroy {
-  @Input() public dataRates!: IExchangeInterface;
-  public bill!: number;
+export class BalanceComponent implements OnInit {
+  @Input() public dataRates!: IExchangeInterface | null;
   public currentBalance$!: Observable<ICurrentBalance | null>;
-  private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(getBalanceAction());
     this.initializeValue();
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  private initializeValue(): void {
+  public initializeValue(): void {
     this.currentBalance$ = this.store.pipe(select(currentBalanceSelector));
   }
 }

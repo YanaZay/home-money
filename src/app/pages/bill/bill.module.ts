@@ -11,7 +11,8 @@ import { MaterialModule } from '../../shared/material.module';
 import { BillService } from './bill.service';
 import { CurrentComponent } from './components/current/current.component';
 import { billReducer } from './store/reducers';
-import { BalanceEffect } from './store/effects/balance.effect';
+import { GetBalanceEffect } from './store/effects/get-balance.effect';
+import { GetExchangeRatesEffect } from './store/effects/get-exchange-rates.effect';
 
 const routes: Routes = [{ path: '', component: BillComponent }];
 
@@ -22,7 +23,7 @@ const routes: Routes = [{ path: '', component: BillComponent }];
     RouterModule.forChild(routes),
     MaterialModule,
     StoreModule.forFeature('bill', billReducer),
-    EffectsModule.forFeature([BalanceEffect]),
+    EffectsModule.forFeature([GetBalanceEffect, GetExchangeRatesEffect]),
   ],
   providers: [BillService],
 })

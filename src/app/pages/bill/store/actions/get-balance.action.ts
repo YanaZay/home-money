@@ -1,13 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import { ICurrentBalance } from '../../../../shared/types/current-balance.interface';
 
-export const getBalanceAction = createAction('[Bill] Bill get balance');
+export const getBalanceAction = createAction('[Bill] Get balance');
 
 export const getBalanceSuccessAction = createAction(
-  '[Bill] Bill get balance success',
+  '[Bill] Get balance success',
   props<{ currentBalance: ICurrentBalance }>()
 );
 
 export const getBalanceFailureAction = createAction(
-  '[Bill] Bill get balance failure'
+  '[Bill] Get balance failure'
 );

@@ -15,7 +15,6 @@ export class BillService {
   public getBalance(): Observable<ICurrentBalance> {
     return this.http.get<ICurrentBalance>('/bill');
   }
-  //TODO check interceptor
 
   public getExchangeRates(): Observable<IExchangeInterface> {
     return this.http.get<IExchangeInterface>('/currency');
