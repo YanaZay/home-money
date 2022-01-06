@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { HistoryService } from '../../../history.service';
-import { IEvents } from '../../../../../shared/models/events.interface';
-import { ICategories } from '../../../../../shared/models/categories.interface';
+import { IEvents } from '../../../../../shared/types/events.interface';
+import { ICategories } from '../../../../../shared/types/categories.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit, OnDestroy {
   public id!: number;
@@ -24,33 +24,37 @@ export class CardComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.route.params
       .pipe(takeUntil(this.destroy$))
-      .subscribe( (params: Params) => {
+      .subscribe((params: Params) => {
         this.id = params ? +params.id : null!;
         this.historyService.changeHistoryTitle.next(this.id);
-    })
+      });
     this.getEvent();
   }
 
   public getEvent(): void {
     if (this.id) {
-      this.historyService.getEvents()
+      this.historyService
+        .getEvents()
         .pipe(takeUntil(this.destroy$))
-        .subscribe( (events: IEvents[]) => {
-        this.currentEvent = events.find(({id}) => id === this.id)!;
-        this.getCategories()
-      })
+        .subscribe((events: IEvents[]) => {
+          this.currentEvent = events.find(({ id }) => id === this.id)!;
+          this.getCategories();
+        });
     }
   }
 
   public getCategories(): void {
     if (this.currentEvent) {
-      this.historyService.getCategories()
+      this.historyService
+        .getCategories()
         .pipe(takeUntil(this.destroy$))
         .subscribe((categories: ICategories[]) => {
           for (let cat of categories) {
-            this.currentEvent.category === cat.id ? this.currentEvent.category = cat.name : null;
+            this.currentEvent.category === cat.id
+              ? (this.currentEvent.category = cat.name)
+              : null;
           }
-      })
+        });
     }
   }
 

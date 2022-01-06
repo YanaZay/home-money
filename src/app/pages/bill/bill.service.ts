@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { IExchangeInterface } from '../../shared/models/exchange.interface';
+import { IExchangeInterface } from '../../shared/types/exchange.interface';
 
 @Injectable({
   providedIn: 'root',

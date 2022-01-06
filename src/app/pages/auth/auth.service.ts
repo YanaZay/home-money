@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { IRegisterRequest } from '../../shared/models/registerRequest.interface';
-import { ICurrentUser } from '../../shared/models/currentUser.interface';
-import { ILoginRequest } from '../../shared/models/loginRequest.interface';
+import { IRegisterRequest } from '../../shared/types/registerRequest.interface';
+import { ICurrentUser } from '../../shared/types/currentUser.interface';
+import { ILoginRequest } from '../../shared/types/loginRequest.interface';
 
 @Injectable({
   providedIn: 'root',

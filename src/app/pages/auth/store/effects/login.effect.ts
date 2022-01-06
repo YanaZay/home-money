@@ -8,7 +8,7 @@ import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { AuthService } from '../../auth.service';
-import { ICurrentUser } from '../../../../shared/models/currentUser.interface';
+import { ICurrentUser } from '../../../../shared/types/currentUser.interface';
 import {
   loginAction,
   loginFailureAction,
@@ -17,7 +17,7 @@ import {
 
 @Injectable()
 export class LoginEffect {
-  private login$ = createEffect(() =>
+  public login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loginAction),
       switchMap(({ request }) => {

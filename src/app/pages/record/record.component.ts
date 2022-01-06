@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HistoryService } from '../history/history.service';
-import { ICategories } from '../../shared/models/categories.interface';
+import { ICategories } from '../../shared/types/categories.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventComponent } from './modal/add-event/add-event.component';
 import { DeleteCategoryComponent } from './modal/delete-category/delete-category.component';
@@ -12,74 +12,79 @@ import { EditCategoryComponent } from './modal/edit-category/edit-category.compo
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
-  styleUrls: ['./record.component.scss']
+  styleUrls: ['./record.component.scss'],
 })
 export class RecordComponent implements OnInit, OnDestroy {
   public start: number = 0;
   public dataSource!: ICategories[];
-  public displayedColumns: string [] = ['id', 'name', 'capacity', 'button'];
+  public displayedColumns: string[] = ['id', 'name', 'capacity', 'button'];
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(
-    private service: HistoryService,
-    private matDialog: MatDialog,
-  ) {}
+  constructor(private service: HistoryService, private matDialog: MatDialog) {}
 
   public ngOnInit(): void {
     this._getData();
   }
 
   public addNewEvent(): void {
-    const dialogRef = this.matDialog.open<AddEventComponent>(AddEventComponent, {data: this.dataSource});
+    const dialogRef = this.matDialog.open<AddEventComponent>(
+      AddEventComponent,
+      { data: this.dataSource }
+    );
 
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-      data => {
-        if(data) {
+      .subscribe((data) => {
+        if (data) {
           this._getData();
         }
-      }
-    )
+      });
   }
 
   public deleteCategory(category: ICategories): void {
-    const dialogRef = this.matDialog.open<DeleteCategoryComponent>(DeleteCategoryComponent, {data: category});
+    const dialogRef = this.matDialog.open<DeleteCategoryComponent>(
+      DeleteCategoryComponent,
+      { data: category }
+    );
 
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-      data => {
+      .subscribe((data) => {
         if (data) {
-          this._getData()
+          this._getData();
         }
-      }
-    )
+      });
   }
 
   public addNewCategory(): void {
-    const dialogRef = this.matDialog.open<AddCategoryComponent>(AddCategoryComponent);
+    const dialogRef =
+      this.matDialog.open<AddCategoryComponent>(AddCategoryComponent);
 
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-      data => {
+      .subscribe((data) => {
         if (data) {
-          this._getData()
+          this._getData();
         }
-      }
-    )
+      });
   }
 
   public editCategory(category: ICategories): void {
-    const dialogRef = this.matDialog.open<EditCategoryComponent>(EditCategoryComponent, {data: {category, categoryArray: this.dataSource}});
-    dialogRef.afterClosed()
+    const dialogRef = this.matDialog.open<EditCategoryComponent>(
+      EditCategoryComponent,
+      { data: { category, categoryArray: this.dataSource } }
+    );
+    dialogRef
+      .afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
-      if (data) {
-        this._getData()
-      }
-    })
+      .subscribe((data) => {
+        if (data) {
+          this._getData();
+        }
+      });
   }
 
   public ngOnDestroy(): void {
@@ -88,10 +93,11 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   private _getData(): void {
-    this.service.getCategories()
+    this.service
+      .getCategories()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
+      .subscribe((data) => {
         this.dataSource = data;
-      })
+      });
   }
 }

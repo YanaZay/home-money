@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { IAuthState } from '../../../shared/models/authState.interface';
+import { IAuthState } from '../../../shared/types/authState.interface';
 import {
   registerAction,
   registerFailureAction,

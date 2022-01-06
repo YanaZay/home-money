@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IBill } from '../../../../shared/models/bill.interface';
+import { IBill } from '../../../../shared/types/bill.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IExchangeInterface } from '../../../../shared/models/exchange.interface';
+import { IExchangeInterface } from '../../../../shared/types/exchange.interface';
 
 @Component({
   selector: 'app-balance',

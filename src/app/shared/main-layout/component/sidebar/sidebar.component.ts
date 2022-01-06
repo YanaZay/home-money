@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICurrentUser } from '../../../models/currentUser.interface';
+import { ICurrentUser } from '../../../types/currentUser.interface';
 
 @Component({
   selector: 'app-sidebar',

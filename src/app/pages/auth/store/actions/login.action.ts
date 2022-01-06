@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 
-import { ILoginRequest } from '../../../../shared/models/loginRequest.interface';
-import { ICurrentUser } from '../../../../shared/models/currentUser.interface';
-import { IBackendErrors } from '../../../../shared/models/backendErrors.interface';
+import { ILoginRequest } from '../../../../shared/types/loginRequest.interface';
+import { ICurrentUser } from '../../../../shared/types/currentUser.interface';
+import { IBackendErrors } from '../../../../shared/types/backendErrors.interface';
 
 export const loginAction = createAction(
   '[Auth] Login',

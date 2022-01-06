@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { ICategories } from '../../shared/models/categories.interface';
-import { IEvents } from '../../shared/models/events.interface';
+import { ICategories } from '../../shared/types/categories.interface';
+import { IEvents } from '../../shared/types/events.interface';
 
 @Injectable({
   providedIn: 'root',

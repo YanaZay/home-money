@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ICategories } from '../../../../shared/models/categories.interface';
+import { ICategories } from '../../../../shared/types/categories.interface';
 import { RecordService } from '../../record.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.scss']
+  styleUrls: ['./add-event.component.scss'],
 })
 export class AddEventComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
@@ -18,7 +18,7 @@ export class AddEventComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories[],
     private dialogRef: MatDialogRef<AddEventComponent>,
-    private recordService: RecordService,
+    private recordService: RecordService
   ) {}
 
   public ngOnInit(): void {
@@ -27,12 +27,13 @@ export class AddEventComponent implements OnInit, OnDestroy {
 
   public addNewEvent(): void {
     if (this.form.valid) {
-      console.log(this.form.value)
-      this.recordService.addNewEvent(this.form.value)
+      console.log(this.form.value);
+      this.recordService
+        .addNewEvent(this.form.value)
         .pipe(takeUntil(this.destroy$))
-        .subscribe( () => {
-        this.close(true);
-      })
+        .subscribe(() => {
+          this.close(true);
+        });
     }
   }
 
@@ -51,7 +52,7 @@ export class AddEventComponent implements OnInit, OnDestroy {
       type: new FormControl('', [Validators.required]),
       amount: new FormControl(null, [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      date: new FormControl(new Date())
-    })
+      date: new FormControl(new Date()),
+    });
   }
 }

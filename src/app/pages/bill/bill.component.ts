@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BillService } from "./bill.service";
-import { IExchangeInterface } from "../../shared/models/exchange.interface";
+import { BillService } from './bill.service';
+import { IExchangeInterface } from '../../shared/types/exchange.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.component.html',
-  styleUrls: ['./bill.component.scss']
+  styleUrls: ['./bill.component.scss'],
 })
 export class BillComponent implements OnInit, OnDestroy {
   public rates!: IExchangeInterface;
@@ -26,11 +26,12 @@ export class BillComponent implements OnInit, OnDestroy {
   }
 
   public getData(): void {
-    this.billService.getExchangeRates()
+    this.billService
+      .getExchangeRates()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data:IExchangeInterface) => {
+      .subscribe((data: IExchangeInterface) => {
         this.rates = data;
         this.loading = false;
-      })
+      });
   }
 }

@@ -12,7 +12,7 @@ import {
   registerSuccessAction,
 } from '../actions/register.action';
 import { AuthService } from '../../auth.service';
-import { ICurrentUser } from '../../../../shared/models/currentUser.interface';
+import { ICurrentUser } from '../../../../shared/types/currentUser.interface';
 
 @Injectable()
 export class RegisterEffect {
